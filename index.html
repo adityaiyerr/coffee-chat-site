@@ -83,7 +83,7 @@
   #log .cmd::before{content:"> ";color:var(--amber)}
 
   /* Function keys */
-  .keys{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:6px 0 22px;
+  .keys{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:6px 0 22px;
     opacity:0}
   .keys.show{opacity:1;transition:opacity .5s ease .1s}
   .key{appearance:none;text-align:left;cursor:pointer;color:inherit;
@@ -124,6 +124,7 @@
   @media (max-width:560px){
     .screen{padding:24px 18px 18px}
     .keys{grid-template-columns:repeat(2,1fr)}
+    .keys .key:last-child:nth-child(odd){grid-column:1/-1;max-width:calc(50% - 6px)}
   }
 
   /* Quality floor: honour reduced-motion — no typing, blink, or scroll. */
@@ -156,9 +157,10 @@
 
   <div class="keys" id="keys">
     <button class="key" data-key="research"><span class="fk">F1</span><span class="label">Research</span><span class="desc">equity reports</span></button>
-    <button class="key" data-key="netcast"><span class="fk">F2</span><span class="label">NetCast</span><span class="desc">outreach desk</span></button>
-    <button class="key" data-key="ventures"><span class="fk">F3</span><span class="label">Ventures</span><span class="desc">the product</span></button>
-    <button class="key" data-key="showcase"><span class="fk">F4</span><span class="label">Showcase</span><span class="desc">built for fun</span></button>
+    <button class="key" data-key="portfolio"><span class="fk">F2</span><span class="label">Portfolio</span><span class="desc">live tracker</span></button>
+    <button class="key" data-key="sales-agent"><span class="fk">F3</span><span class="label">Sales Agent</span><span class="desc">B2B lead gen</span></button>
+    <button class="key" data-key="resume"><span class="fk">F4</span><span class="label">Resume</span><span class="desc">cv &amp; background</span></button>
+    <button class="key" data-key="music"><span class="fk">F5</span><span class="label">Music</span><span class="desc">tracks &amp; projects</span></button>
   </div>
 
   <div class="promptline" id="promptline">
@@ -186,14 +188,14 @@
    While `live:false`, the command prints a status line instead of 404-ing.
 --------------------------------------------------------------------------- */
 const SECTIONS = {
-  research:        { label:'Research', path:'/research/',      live:false },
-  netcast:         { label:'NetCast',  path:'/mass-outreach/', live:true  },
-  'mass-outreach': { label:'NetCast',  path:'/mass-outreach/', live:true  },
-  ventures:        { label:'Ventures', path:'/ventures/',      live:false },
-  showcase:        { label:'Showcase', path:'/showcase/',      live:false },
+  research:      { label:'Research',    path:'/research/',    live:false },
+  portfolio:     { label:'Portfolio',   path:'/portfolio/',   live:false },
+  'sales-agent': { label:'Sales Agent', path:'/sales-agent/', live:false },
+  resume:        { label:'Resume',      path:'/resume/',      live:false },
+  music:         { label:'Music',       path:'/music/',       live:false },
 };
-const FKEYS = { F1:'research', F2:'netcast', F3:'ventures', F4:'showcase',
-                '1':'research', '2':'netcast', '3':'ventures', '4':'showcase' };
+const FKEYS = { F1:'research', F2:'portfolio', F3:'sales-agent', F4:'resume', F5:'music',
+                '1':'research', '2':'portfolio', '3':'sales-agent', '4':'resume', '5':'music' };
 
 const reduce = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
 const $ = s => document.querySelector(s);
@@ -248,13 +250,14 @@ function activate(key){
 
 const HELP = [
   'available commands',
-  '  research   equity reports and theses',
-  '  netcast    the done-for-you outreach desk',
-  '  ventures   the product in development',
-  '  showcase   experiments, built for fun',
-  '  about      who runs this terminal',
-  '  contact    how to reach the desk',
-  '  clear      wipe the screen',
+  '  research      equity reports and theses',
+  '  portfolio     live public portfolio tracker',
+  '  sales-agent   B2B AI lead generation product',
+  '  resume        cv and background',
+  '  music         tracks and projects',
+  '  about         who runs this terminal',
+  '  contact       how to reach the desk',
+  '  clear         wipe the screen',
 ].join('\n');
 
 function handle(raw){
@@ -265,7 +268,7 @@ function handle(raw){
   switch(cmd){
     case 'help': case '?': case 'ls': print(`<span style="white-space:pre">${HELP}</span>`); break;
     case 'about': print('Aditya Iyer — finance student, equity researcher, and builder. This terminal is the front door to the work.'); break;
-    case 'contact': print('email <span class="k">ahiyer@usc.edu</span> — or run <span class="k">netcast</span> to book the outreach desk.'); break;
+    case 'contact': print('email <span class="k">ahiyer@usc.edu</span>'); break;
     case 'clear': logEl.innerHTML=''; break;
     default: print(`command not found: <span class="k">${cmd}</span> — type <span class="k">help</span>`);
   }
@@ -295,8 +298,8 @@ document.addEventListener('click', e=>{
 
 /* ---- Ticker --------------------------------------------------------------- */
 $('#tickertext').innerHTML =
-  'IYER 1.0 <b>▲</b>  research desk online  ·  netcast — booking the next cohort  ·  ' +
-  'ventures — in development  ·  <b>"cast a wide net"</b>  ·  type <b>help</b> to begin  ·  ';
+  'IYER 1.0 <b>▲</b>  research desk online  ·  portfolio — live tracker coming soon  ·  ' +
+  'sales agent — B2B lead gen in development  ·  resume — on file  ·  music — in the works  ·  type <b>help</b> to begin  ·  ';
 
 runBoot();
 </script>
