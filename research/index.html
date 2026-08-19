@@ -3,24 +3,485 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Research — Iyer Terminal</title>
+<title>IQE PLC — Research Report</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{background:#0a0c0b;color:#8fb99a;font-family:'IBM Plex Mono',ui-monospace,monospace;
-    display:flex;align-items:center;justify-content:center;min-height:100vh;
-    flex-direction:column;gap:18px;padding:24px;text-align:center}
-  .label{font-size:0.7rem;letter-spacing:.16em;text-transform:uppercase;color:#4f6b58}
-  .title{font-size:1.1rem;color:#cfe0d3;letter-spacing:.04em}
-  .status{font-size:0.82rem;color:#4f6b58}
-  a{color:#d3a24a;text-decoration:none;font-size:0.78rem;letter-spacing:.1em;
-    text-transform:uppercase;border-bottom:1px solid #1c2a20;padding-bottom:1px}
-  a:hover{color:#e8b85a;border-color:#8a6c33}
+  :root {
+    --cream: #fbf7f0;
+    --green: #355E3B;
+    --green-dark: #274830;
+    --text: #13261e;
+    --blue: #002147;
+    --border: #d8cfc4;
+    --muted: #6b7c74;
+    --rule: #e8e0d6;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--text);
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 17px;
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .back-bar {
+    padding: 9px 5%;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border);
+  }
+  .back-bar a { color: var(--muted); text-decoration: none; }
+  .back-bar a:hover { color: var(--green); }
+
+  .wrap {
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 64px 5% 96px;
+  }
+
+  /* ── Header ── */
+  .report-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  .report-ticker {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.6rem, 6vw, 3.8rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+
+  .report-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--muted);
+    margin-bottom: 28px;
+    line-height: 1.4;
+  }
+
+  .meta-row {
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    padding-bottom: 28px;
+    border-bottom: 2px solid var(--text);
+    margin-bottom: 40px;
+  }
+
+  .meta-row span b {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  /* ── Thesis box ── */
+  .thesis-box {
+    border-left: 3px solid var(--green);
+    padding: 20px 24px;
+    background: rgba(53,94,59,0.04);
+    margin-bottom: 52px;
+    border-radius: 0 4px 4px 0;
+  }
+
+  .thesis-box .thesis-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 10px;
+  }
+
+  .thesis-box p {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--text);
+  }
+
+  /* ── Sections ── */
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.65rem;
+    font-weight: 500;
+    color: var(--text);
+    margin: 52px 0 18px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--text);
+    margin: 32px 0 10px;
+  }
+
+  p { margin-bottom: 20px; }
+
+  p:last-child { margin-bottom: 0; }
+
+  /* ── Data table ── */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    margin: 28px 0 36px;
+  }
+
+  .data-table th {
+    text-align: left;
+    padding: 8px 12px;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 2px solid var(--border);
+  }
+
+  .data-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--rule);
+    color: var(--text);
+    vertical-align: top;
+  }
+
+  .data-table tr:last-child td { border-bottom: none; }
+
+  .td-label { color: var(--muted); }
+  .td-val { font-weight: 500; }
+  .td-green { color: var(--green); font-weight: 500; }
+
+  /* ── Bull/Bear ── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 28px 0 36px;
+  }
+
+  .col-card {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 22px 20px;
+  }
+
+  .col-card .col-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  .col-card.bull .col-label { color: var(--green); }
+  .col-card.bear .col-label { color: #8a3a3a; }
+
+  .col-card ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .col-card ul li {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    padding: 7px 0;
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    gap: 10px;
+  }
+
+  .col-card ul li:last-child { border-bottom: none; }
+
+  .col-card.bull ul li::before { content: '+'; color: var(--green); flex-shrink: 0; font-weight: 600; }
+  .col-card.bear ul li::before { content: '−'; color: #8a3a3a; flex-shrink: 0; font-weight: 600; }
+
+  /* ── Price target box ── */
+  .target-box {
+    border: 1px solid var(--green);
+    border-radius: 4px;
+    padding: 28px 28px;
+    margin: 36px 0;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  .target-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 300;
+    color: var(--green);
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .target-meta { flex: 1; min-width: 180px; }
+
+  .target-meta .t-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+
+  .target-meta p {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* ── Disclaimer ── */
+  .disclaimer {
+    margin-top: 64px;
+    padding: 20px 0;
+    border-top: 1px solid var(--border);
+    font-size: 0.78rem;
+    color: var(--muted);
+    line-height: 1.65;
+    font-style: italic;
+  }
+
+  @media (max-width: 600px) {
+    .two-col { grid-template-columns: 1fr; }
+    .target-box { flex-direction: column; gap: 16px; }
+    .meta-row { gap: 16px; }
+  }
 </style>
 </head>
 <body>
-  <span class="label">Iyer Terminal</span>
-  <span class="title">research</span>
-  <span class="status">coming online</span>
-  <a href="/">← terminal</a>
+
+<div class="back-bar"><a href="/">← terminal</a></div>
+
+<div class="wrap">
+
+  <p class="report-label">Equity Research — Long Idea</p>
+  <div class="report-ticker">IQE PLC <span style="font-size:1.4rem; color:var(--muted);">AIM: IQE</span></div>
+  <div class="report-title">A Compound Semiconductor Compounder Priced for Failure</div>
+
+  <div class="meta-row">
+    <span><b>Entry</b> ~30p per share</span>
+    <span><b>Rating</b> BUY</span>
+    <span><b>Exchange</b> London AIM</span>
+    <span><b>Sector</b> Semiconductors</span>
+    <span><b>Author</b> Aditya Iyer</span>
+  </div>
+
+  <div class="thesis-box">
+    <div class="thesis-label">Core Thesis</div>
+    <p>IQE is the dominant independent manufacturer of compound semiconductor epitaxial wafers — an unglamorous but strategically critical position in the global chip supply chain. After a brutal multi-year de-rating driven by VCSEL demand disappointment and a short-seller campaign, the stock at 30p prices in virtually no recovery and assigns minimal value to the company's growing exposure to GaN power, RF, and photonics. The market is extrapolating the recent past into perpetuity. The underlying technology adoption cycle disagrees.</p>
+  </div>
+
+  <!-- COMPANY OVERVIEW -->
+  <h2>Company Overview</h2>
+
+  <p>IQE PLC was founded in 1988 and is headquartered in Cardiff, Wales. It is the world's largest independent manufacturer of compound semiconductor wafers, a niche but essential segment of the broader semiconductor ecosystem. Unlike traditional silicon wafer producers, IQE makes epitaxial wafers from materials including gallium arsenide (GaAs), indium phosphide (InP), gallium nitride (GaN), and indium antimonide (InSb).</p>
+
+  <p>The term "epitaxial" refers to the process of growing thin crystalline layers of semiconductor material onto a substrate wafer. These layers define the electrical and optical characteristics of the chips that will eventually be fabricated on top. IQE does not make chips — it makes the substrates that chip designers depend on to achieve performance that silicon simply cannot replicate.</p>
+
+  <p>The company operates manufacturing facilities across the UK, US, and Asia, serving a global customer base that spans mobile communications, consumer electronics, defence, and increasingly, power electronics. It sits upstream of some of the largest chip companies in the world, supplying wafers that ultimately end up in billions of consumer devices.</p>
+
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Key Facts</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="td-label">Listing</td><td class="td-val">AIM (London Stock Exchange)</td></tr>
+      <tr><td class="td-label">Ticker</td><td class="td-val">IQE</td></tr>
+      <tr><td class="td-label">Headquarters</td><td class="td-val">Cardiff, Wales, UK</td></tr>
+      <tr><td class="td-label">Founded</td><td class="td-val">1988</td></tr>
+      <tr><td class="td-label">Core Product</td><td class="td-val">Compound semiconductor epitaxial wafers</td></tr>
+      <tr><td class="td-label">Key Materials</td><td class="td-val">GaAs, InP, GaN, InSb</td></tr>
+      <tr><td class="td-label">Entry Price</td><td class="td-val td-green">~30p</td></tr>
+    </tbody>
+  </table>
+
+  <!-- WHY COMPOUND SEMICONDUCTORS MATTER -->
+  <h2>Why Compound Semiconductors Are Not Optional</h2>
+
+  <p>The semiconductor industry spent decades perfecting silicon. Moore's Law drove performance improvements on a predictable schedule, and silicon's abundance made it the obvious choice for general-purpose computing. But silicon has hard physical limits that compound semiconductors do not. For applications requiring high-frequency operation, light emission, radiation hardness, or power efficiency at elevated temperatures, GaAs, GaN, and InP are not alternatives to silicon — they are the only viable materials.</p>
+
+  <h3>Mobile Radio Frequency</h3>
+  <p>Every smartphone contains GaAs-based chips in its RF front-end module. These chips handle signal amplification and filtering for cellular, Wi-Fi, and Bluetooth. As networks migrate from 4G to 5G and spectrum usage intensifies, the performance demands on RF front-ends increase significantly. GaAs remains the material of choice for power amplifiers operating at the frequencies 5G requires, and IQE supplies GaAs epiwafers into this market through its relationships with the major RF chip houses.</p>
+
+  <h3>VCSELs and 3D Sensing</h3>
+  <p>IQE's revenue peaked sharply in 2017 and 2018 when Apple launched Face ID, which relies on vertical-cavity surface-emitting lasers (VCSELs) to project thousands of infrared dots for facial mapping. VCSELs are made from GaAs-based epiwafers, and IQE was a primary supplier into the supply chain that served Apple. The boom was significant — and so was the hangover when volumes plateaued and ASPs compressed as more competition entered.</p>
+
+  <p>The bear case on IQE is largely a VCSEL story told in reverse. What is less appreciated is that VCSEL technology has found a growing number of homes beyond consumer 3D sensing: data centre optical interconnects running at 400G, 800G, and increasingly 1.6T are largely built on VCSEL arrays, and this market is growing quickly. Every hyperscaler building AI training infrastructure is also building fibre interconnect density, and VCSELs sit at the heart of it.</p>
+
+  <h3>GaN Power and the EV Cycle</h3>
+  <p>Gallium nitride transistors have better switching characteristics than silicon at high voltages and frequencies. This makes GaN ideal for power converters in electric vehicle drivetrains, fast-charging adapters, solar inverters, and data centre power supplies. The adoption curve here is still early but the trajectory is steep. IQE has been building its GaN-on-Silicon capability for several years, targeting this market, and the royalty on the long-term growth here is meaningful relative to the current share price.</p>
+
+  <h3>Defence and Infrared</h3>
+  <p>IQE's InSb and InP wafers serve defence applications including thermal imaging and high-speed optical communications. Defence spending cycles are generally more predictable than consumer electronics cycles, and IQE's position as a trusted UK-based supplier creates some insulation from the geopolitical headwinds affecting Asian semiconductor supply chains.</p>
+
+  <!-- WHY THE STOCK IS WHERE IT IS -->
+  <h2>Why the Market Hates This Stock</h2>
+
+  <p>Understanding why IQE has derated so aggressively requires going back to the 2017-2018 period. When Apple's Face ID drove a surge in VCSEL demand, IQE's revenue and investor enthusiasm both ran well ahead of the underlying earnings power of the business. The stock hit 170p in 2017, implying a market cap that required flawless execution and continued Apple volume growth. Neither materialised at the expected rate.</p>
+
+  <p>Apple's supply chain shifted, VCSEL pricing eroded as the technology matured, and IQE found itself with capacity built for a volume level that never quite arrived. Revenue declined from its peak, and guidance cuts became a recurring theme. Management credibility suffered accordingly.</p>
+
+  <p>In 2019, the situation was compounded when Shadowfall Capital, a short-seller, published a detailed critical report challenging IQE's accounting practices and customer concentration. While IQE's management and auditors pushed back on the allegations, the report rattled retail investors and the stock fell sharply. The reputational damage lingered longer than the actual substance of the allegations warranted.</p>
+
+  <p>Since then, the narrative has remained negative. Revenue declined, margins compressed, and the growth markets that were supposed to replace VCSEL volume — GaN, automotive — took longer to ramp than hoped. The stock has spent years drifting lower, with occasional relief rallies that faded. By the time the stock finds itself around 30p, most of the investors who owned it on the way down have either sold or given up.</p>
+
+  <p>This is, historically, where interesting entry points emerge. When the only sellers left are the ones who have already mostly sold, the incremental news flow required to re-rate the stock upward is lower than it appears.</p>
+
+  <!-- THE BULL CASE -->
+  <h2>The Bull Case</h2>
+
+  <h3>Secular tailwinds are real and accelerating</h3>
+  <p>Compound semiconductors are not a niche curiosity — they are load-bearing materials in the infrastructure buildout that the current technology cycle depends on. AI model training requires dense optical interconnects. Fast charging for EVs requires GaN power stages. 5G network densification requires GaAs RF chips. IQE does not need to win any new customers to benefit from volume growth across each of these categories; it needs its existing customers to ship more units.</p>
+
+  <h3>IQE has a durable competitive position</h3>
+  <p>Growing compound semiconductor epiwafers requires decades of process know-how, proprietary reactor configurations, and materials science expertise that is genuinely difficult to replicate. The capital cost of building a competing facility is meaningful, but the knowledge cost is far higher. IQE has been doing this since 1988. Its manufacturing IP, developed under sustained R&D investment, represents a barrier to entry that is not reflected in a 30p share price.</p>
+
+  <p>There are only a handful of independent compound semiconductor wafer manufacturers at scale globally. As geopolitical risk drives Western governments to push for onshoring of strategic semiconductor supply chains, IQE's UK and US manufacturing footprint positions it as the obvious beneficiary of any government-backed compound semiconductor initiative.</p>
+
+  <h3>Restructuring has right-sized the cost base</h3>
+  <p>Management has spent the past several years reducing headcount, consolidating facilities, and improving the cost structure. The intent is to reduce the revenue level at which IQE generates positive operating cash flow, and to build in more operating leverage for when volumes recover. This is unglamorous work, and it doesn't generate positive news flow. But it means that when revenue does eventually recover — driven by GaN, photonics, or RF volume — the profit impact will be disproportionate to the revenue move.</p>
+
+  <h3>The book value floor</h3>
+  <p>Compound semiconductor manufacturing equipment is specialised and expensive. IQE's balance sheet carries substantial tangible assets accumulated over decades of capital investment. At 30p, the market is pricing IQE at a level that, by most standard measures, represents a significant discount to the replacement cost of its asset base. This is not a guarantee of upside, but it provides a floor argument that pure-software-style companies cannot make.</p>
+
+  <!-- VALUATION -->
+  <h2>Valuation</h2>
+
+  <p>Valuing a cyclically-depressed capital-intensive business requires looking through the trough rather than anchoring to it. The following table shows a range of scenario outcomes and what they would imply for the share price, using a simplified EV/Revenue approach consistent with how comparable businesses tend to trade at normalised earnings levels.</p>
+
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Scenario</th>
+        <th>Revenue</th>
+        <th>EV/Rev Multiple</th>
+        <th>Implied Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="td-label">Bear — no recovery</td>
+        <td>Prior-year levels</td>
+        <td>0.5x</td>
+        <td>~20–25p</td>
+      </tr>
+      <tr>
+        <td class="td-label">Base — modest recovery</td>
+        <td>+20–30% from trough</td>
+        <td>1.0x</td>
+        <td>~50–65p</td>
+      </tr>
+      <tr>
+        <td class="td-label td-green">Bull — GaN/photonics inflection</td>
+        <td>Towards prior peak</td>
+        <td>1.5–2.0x</td>
+        <td>~90–130p</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>The base case alone offers roughly 2x from the 30p entry. The bull case — which does not require IQE to return to its 2017 peak revenue but simply to grow into the addressable markets it has already spent years preparing for — offers 3–4x. The bear case implies further downside of 15–25%, and even then assumes no value for the asset base, which is a stretch.</p>
+
+  <div class="target-box">
+    <div class="target-number">60–80p</div>
+    <div class="target-meta">
+      <div class="t-label">12-Month Price Target</div>
+      <p>Base case target range on modest revenue recovery, cost structure improvement, and re-rating as GaN and photonics revenues become more visible to the market. Entry at 30p represents a 2–2.7x return to target.</p>
+    </div>
+  </div>
+
+  <!-- BULL / BEAR -->
+  <h2>Bull vs. Bear</h2>
+
+  <div class="two-col">
+    <div class="col-card bull">
+      <div class="col-label">Bull Case</div>
+      <ul>
+        <li>GaN power ramp across EV and data centre markets accelerates faster than expected</li>
+        <li>Data centre VCSEL volumes grow sharply on AI optical interconnect buildout</li>
+        <li>UK/US government support for strategic compound semiconductor supply chains</li>
+        <li>Restructuring creates significant operating leverage on revenue recovery</li>
+        <li>Customer concentration risk reduces as new end-markets mature</li>
+        <li>M&A potential as strategic value of the asset base attracts larger players</li>
+      </ul>
+    </div>
+    <div class="col-card bear">
+      <div class="col-label">Bear Case</div>
+      <ul>
+        <li>GaN and photonics ramps continue to take longer than forecast</li>
+        <li>Apple further reduces VCSEL content in future device generations</li>
+        <li>Customers increase in-house wafer production, reducing IQE's addressable market</li>
+        <li>Cash burn continues without a clear path to FCF breakeven</li>
+        <li>A further equity raise at depressed prices dilutes existing shareholders</li>
+        <li>Continued management credibility issues weigh on sentiment</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- KEY RISKS -->
+  <h2>Key Risks</h2>
+
+  <h3>Customer concentration</h3>
+  <p>A meaningful portion of IQE's revenue has historically been tied to the Apple supply chain, primarily through VCSEL wafers supplied to Lumentum and other tier-one laser manufacturers. Apple product cycle changes have historically had an outsized impact on IQE's quarterly results. This concentration risk has not fully disappeared and remains the primary near-term earnings risk.</p>
+
+  <h3>Technology substitution</h3>
+  <p>Silicon continues to improve, and silicon photonics in particular is maturing as a competing technology for data centre optical interconnects. If silicon photonics achieves cost and performance parity with InP-based solutions faster than expected, it would compress one of IQE's emerging growth vectors. This is a real risk, though the timeline for meaningful displacement is measured in years, not quarters.</p>
+
+  <h3>Execution risk on GaN</h3>
+  <p>IQE has been promising meaningful GaN revenue for longer than the market would like. There is a legitimate question about the pace at which GaN-on-Silicon volumes will ramp and at what margins. If the ramp continues to disappoint against management timelines, the de-rating that has already occurred could deepen.</p>
+
+  <h3>Balance sheet</h3>
+  <p>Capital-intensive manufacturing businesses in a trough period face real pressure on their balance sheets. Any deterioration in liquidity that forces a dilutive equity raise at depressed prices would be damaging to existing shareholders. Monitoring the cash position and debt covenants is essential for anyone holding this name.</p>
+
+  <h3>FX exposure</h3>
+  <p>IQE reports in sterling but generates a significant portion of its revenue in US dollars. Sterling strength relative to the dollar compresses reported revenue and margins without any change in the underlying business. This is a manageable risk for long-term holders but can create short-term noise in the numbers.</p>
+
+  <!-- CONCLUSION -->
+  <h2>Conclusion</h2>
+
+  <p>IQE at 30p is not a story about a company firing on all cylinders. It is a story about an asset with genuine strategic value — deep technical know-how, irreplaceable manufacturing IP, and exposure to several secular growth themes — being priced as though none of that value exists and the current trough represents a permanent state.</p>
+
+  <p>The compound semiconductor end-markets that IQE serves are growing. 5G densification, EV powertrain electrification, AI data centre optical infrastructure, and defence electronics spending are not optional demand drivers — they are the result of structural shifts in how the world builds and connects things. IQE, as the leading independent supplier of the wafers that underpin these technologies, is positioned to participate in this growth. Whether it does so efficiently is a management execution question, not a technology question.</p>
+
+  <p>The risk/reward at 30p looks asymmetric in the way that deeply beaten-down industrials often do. The downside is real — more dilution, slower ramp, more disappointment — but it is bounded. The upside, in a scenario where even one or two of IQE's end-market growth drivers materialise on a reasonable timeline, is a multiple of the current price.</p>
+
+  <p>This is a position that requires patience and a tolerance for continued short-term noise. It is not a catalyst-driven trade. It is a bet that the market, having thoroughly punished IQE for the sins of the 2017 hype cycle, has overcorrected and is now ignoring what the company actually owns. That bet, entered at 30p, looks reasonable to me.</p>
+
+  <div class="disclaimer">
+    This is a personal research note and reflects my own views only. Nothing here constitutes financial advice. I may hold a position in IQE PLC at the time of writing. Always do your own research and consult a qualified financial adviser before making investment decisions. Past performance of any security discussed is not indicative of future results.
+  </div>
+
+</div>
 </body>
 </html>
