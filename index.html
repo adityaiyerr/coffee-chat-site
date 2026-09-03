@@ -191,7 +191,7 @@ const SECTIONS = {
   research:      { label:'Research',    path:'/research/',    live:true  },
   portfolio:     { label:'Portfolio',   path:'/portfolio/',   live:false },
   'sales-agent': { label:'Sales Agent', path:'/sales-agent/', live:false },
-  resume:        { label:'Resume',      path:'/resume/',      live:false },
+  resume:        { label:'Résumé',      path:'/resume/',      live:true  },
   music:         { label:'Music',       path:'/music/',       live:false },
 };
 const FKEYS = { F1:'research', F2:'portfolio', F3:'sales-agent', F4:'resume', F5:'music',
@@ -253,7 +253,7 @@ const HELP = [
   '  research      equity reports and theses',
   '  portfolio     live public portfolio tracker',
   '  sales-agent   B2B AI lead generation product',
-  '  resume        cv and background',
+  '  resume        experience, education, and skills',
   '  music         tracks and projects',
   '  about         who runs this terminal',
   '  contact       how to reach the desk',
@@ -267,6 +267,7 @@ function handle(raw){
   if(SECTIONS[cmd]) return activate(cmd);
   switch(cmd){
     case 'help': case '?': case 'ls': print(`<span style="white-space:pre">${HELP}</span>`); break;
+    case 'cv': case 'whoami': return activate('resume');
     case 'about': print('Aditya Iyer — finance student, equity researcher, and builder. This terminal is the front door to the work.'); break;
     case 'contact': print('email <span class="k">ahiyer@usc.edu</span>'); break;
     case 'clear': logEl.innerHTML=''; break;
