@@ -3,24 +3,640 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sales Agent — Iyer Terminal</title>
+<title>B2B Contact Sourcing — Aditya Iyer</title>
+<meta name="description" content="Targeted, verified contact lists built to your ICP. No bought lists, no bounced emails. Book a 20-minute call.">
+<meta property="og:title" content="B2B Contact Sourcing — Aditya Iyer">
+<meta property="og:description" content="Targeted, verified contact lists built to your ICP. No bought lists, no bounced emails.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://adityaiyerr.com/sales-agent/">
+<meta property="og:image" content="https://adityaiyerr.com/favicon.png">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{background:#0a0c0b;color:#8fb99a;font-family:'IBM Plex Mono',ui-monospace,monospace;
-    display:flex;align-items:center;justify-content:center;min-height:100vh;
-    flex-direction:column;gap:18px;padding:24px;text-align:center}
-  .label{font-size:0.7rem;letter-spacing:.16em;text-transform:uppercase;color:#4f6b58}
-  .title{font-size:1.1rem;color:#cfe0d3;letter-spacing:.04em}
-  .status{font-size:0.82rem;color:#4f6b58}
-  a{color:#d3a24a;text-decoration:none;font-size:0.78rem;letter-spacing:.1em;
-    text-transform:uppercase;border-bottom:1px solid #1c2a20;padding-bottom:1px}
-  a:hover{color:#e8b85a;border-color:#8a6c33}
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #fbf7f0;
+    --green: #355E3B;
+    --green-dark: #274830;
+    --text: #13261e;
+    --border: #d8cfc4;
+    --muted: #6b7c74;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── BACK LINK ── */
+  .terminal-back {
+    display: block;
+    padding: 9px 5%;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    background: var(--cream);
+  }
+  .terminal-back:hover { color: var(--green); }
+
+  /* ── SHARED LAYOUT ── */
+  .inner { max-width: 960px; margin: 0 auto; padding: 0 5%; }
+
+  section { padding: 88px 0; border-bottom: 1px solid var(--border); }
+
+  .tag {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+
+  h1, h2, h3 {
+    font-family: var(--serif);
+    font-weight: 400;
+    line-height: 1.15;
+    color: var(--text);
+  }
+
+  /* ── BUTTONS ── */
+  .btn {
+    display: inline-block;
+    padding: 13px 32px;
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 3px;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+    font-family: inherit;
+  }
+  .btn-primary {
+    background: var(--green);
+    color: #fff;
+    border: 1px solid var(--green);
+  }
+  .btn-primary:hover {
+    background: var(--green-dark);
+    border-color: var(--green-dark);
+  }
+  .btn-ghost {
+    background: transparent;
+    color: var(--green);
+    border: none;
+    padding-left: 0;
+    padding-right: 0;
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .btn-ghost:hover { color: var(--green-dark); }
+
+  /* ── HERO ── */
+  #hero {
+    padding: 104px 0 96px;
+  }
+  #hero .inner { max-width: 720px; padding: 0 5%; }
+  #hero .tag { color: var(--green); }
+  #hero h1 {
+    font-size: clamp(2.6rem, 6vw, 4rem);
+    font-weight: 300;
+    font-style: italic;
+    margin-bottom: 24px;
+  }
+  #hero h1 em { font-style: normal; color: var(--green); }
+  #hero p {
+    font-size: 1.05rem;
+    color: var(--muted);
+    max-width: 520px;
+    margin-bottom: 40px;
+    line-height: 1.8;
+  }
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 32px;
+  }
+
+  /* ── PROBLEM ── */
+  #problem .inner { max-width: 680px; padding: 0 5%; }
+  #problem h2 {
+    font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+    margin-bottom: 20px;
+  }
+  #problem p {
+    font-size: 1rem;
+    color: var(--muted);
+    line-height: 1.85;
+  }
+
+  /* ── HOW IT WORKS ── */
+  #how h2 { font-size: clamp(1.7rem, 3.5vw, 2.4rem); margin-bottom: 48px; }
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .step {
+    padding: 36px 28px;
+    border-right: 1px solid var(--border);
+  }
+  .step:last-child { border-right: none; }
+  .step-num {
+    font-family: var(--serif);
+    font-size: 2.6rem;
+    font-weight: 300;
+    color: var(--border);
+    line-height: 1;
+    margin-bottom: 18px;
+  }
+  .step h3 { font-size: 1rem; font-weight: 500; margin-bottom: 8px; }
+  .step p { font-size: 0.88rem; color: var(--muted); line-height: 1.65; }
+
+  /* ── WHAT YOU GET ── */
+  #deliverable h2 { font-size: clamp(1.7rem, 3.5vw, 2.4rem); margin-bottom: 12px; }
+  #deliverable .sub { font-size: 0.95rem; color: var(--muted); margin-bottom: 40px; max-width: 560px; line-height: 1.7; }
+  .deliver-grid {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .deliver-row {
+    padding: 20px 28px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+  }
+  .deliver-row:last-child { border-bottom: none; }
+  .deliver-key {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--green);
+    white-space: nowrap;
+    flex-shrink: 0;
+    width: 130px;
+  }
+  .deliver-val { font-size: 0.92rem; color: var(--muted); line-height: 1.65; }
+
+  /* ── SAMPLE LIST ── */
+  #sample h2 { font-size: clamp(1.7rem, 3.5vw, 2.4rem); margin-bottom: 6px; }
+  .sample-note { font-size: 0.82rem; color: var(--muted); font-style: italic; margin-bottom: 32px; }
+  .table-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+  }
+  .sample-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    white-space: nowrap;
+    min-width: 680px;
+  }
+  .sample-table th {
+    text-align: left;
+    padding: 13px 20px;
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+    background: var(--cream);
+    font-weight: 400;
+  }
+  .sample-table td {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+    vertical-align: middle;
+  }
+  .sample-table tbody tr:last-child td { border-bottom: none; }
+  .sample-table tbody tr:hover td { background: #f5f0e8; }
+  .badge {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 2px;
+  }
+  .badge-v { background: #e4ede6; color: #1e4d24; }
+  .badge-r { background: #f3ece4; color: #7a4820; }
+  .sample-table a {
+    color: var(--green);
+    text-decoration: none;
+    font-size: 0.82rem;
+  }
+  .sample-table a:hover { text-decoration: underline; }
+  .email-cell { color: var(--muted); font-size: 0.85rem; }
+
+  /* ── COMPARISON ── */
+  #compare h2 { font-size: clamp(1.7rem, 3.5vw, 2.4rem); margin-bottom: 40px; }
+  .compare-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.92rem;
+    min-width: 520px;
+  }
+  .compare-table th {
+    text-align: left;
+    padding: 13px 20px;
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 2px solid var(--border);
+    font-weight: 400;
+  }
+  .compare-table th:first-child { width: 30%; }
+  .compare-table td {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.6;
+  }
+  .compare-table tbody tr:last-child td { border-bottom: none; }
+  .row-label { font-weight: 500; font-size: 0.9rem; color: var(--text); }
+  .col-bad { color: var(--muted); }
+  .col-good { color: var(--text); }
+
+  /* ── WHO IT'S FOR ── */
+  #for h2 { font-size: clamp(1.7rem, 3.5vw, 2.4rem); margin-bottom: 20px; }
+  #for p { font-size: 0.95rem; color: var(--muted); line-height: 1.8; margin-bottom: 28px; max-width: 600px; }
+  .for-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .for-tag {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 7px 14px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    color: var(--muted);
+  }
+
+  /* ── PRICING ── */
+  #pricing .inner { max-width: 640px; padding: 0 5%; }
+  #pricing h2 { font-size: clamp(1.7rem, 3.5vw, 2.4rem); margin-bottom: 16px; }
+  .price-display {
+    font-family: var(--serif);
+    font-size: clamp(2.4rem, 5.5vw, 4rem);
+    font-weight: 300;
+    color: var(--text);
+    line-height: 1;
+    margin: 28px 0 8px;
+  }
+  .price-note { font-size: 0.85rem; color: var(--muted); margin-bottom: 32px; }
+  #pricing p { font-size: 0.95rem; color: var(--muted); line-height: 1.8; }
+
+  /* ── FAQ ── */
+  #faq h2 { font-size: clamp(1.7rem, 3.5vw, 2.4rem); margin-bottom: 48px; }
+  .faq-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px 64px;
+  }
+  .faq-q {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+    color: var(--text);
+    line-height: 1.3;
+  }
+  .faq-a { font-size: 0.9rem; color: var(--muted); line-height: 1.8; }
+
+  /* ── CLOSING CTA ── */
+  #cta { text-align: center; border-bottom: none; }
+  #cta .inner { max-width: 600px; padding: 0 5%; }
+  #cta h2 {
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    font-weight: 300;
+    font-style: italic;
+    margin-bottom: 16px;
+  }
+  #cta p { color: var(--muted); font-size: 0.95rem; margin-bottom: 36px; line-height: 1.75; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 740px) {
+    section { padding: 64px 0; }
+    .steps { grid-template-columns: 1fr; }
+    .step { border-right: none; border-bottom: 1px solid var(--border); }
+    .step:last-child { border-bottom: none; }
+    .faq-grid { grid-template-columns: 1fr; gap: 32px; }
+    .hero-actions { flex-direction: column; align-items: flex-start; gap: 16px; }
+  }
+
+  @media (max-width: 480px) {
+    .deliver-row { flex-direction: column; gap: 4px; }
+    .deliver-key { min-width: auto; }
+  }
 </style>
 </head>
 <body>
-  <span class="label">Iyer Terminal</span>
-  <span class="title">sales agent</span>
-  <span class="status">coming online</span>
-  <a href="/">← terminal</a>
+
+<a href="/" class="terminal-back">← terminal</a>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="inner">
+    <p class="tag">B2B Contact Sourcing</p>
+    <h1>Reach the right people.<br><em>With emails that land.</em></h1>
+    <p>You tell me who you're selling to. I source, match, and verify a targeted contact list built to your ICP — ready to import into your outreach tool the day it arrives.</p>
+    <div class="hero-actions">
+      <a href="https://calendly.com/adityaiyerr/aditya-iyer-meeting" class="btn btn-primary" target="_blank" rel="noopener">Book a 20-minute call</a>
+      <a href="#sample" class="btn-ghost">See a sample list ↓</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROBLEM ── -->
+<section id="problem">
+  <div class="inner">
+    <p class="tag">The problem</p>
+    <h2>Bought lists cost you more than they save.</h2>
+    <p>Generic database exports are not matched to anyone's ICP. Email addresses go stale. Your reps burn time chasing contacts who were never a fit, every bounce chips away at your sender reputation, and none of it shows up in the cost of the list.</p>
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ── -->
+<section id="how">
+  <div class="inner">
+    <p class="tag">Process</p>
+    <h2>How it works</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h3>Define your ICP</h3>
+        <p>An intro call to nail down the exact profile: company type, size, industry, region, and the specific roles you need to reach.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h3>Free 25-contact sample</h3>
+        <p>Before you commit, I deliver 25 verified contacts matching your criteria. Review them and decide whether to move forward.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h3>Full list delivered</h3>
+        <p>The complete list arrives deduplicated, verified, and ready to import — with a Verified tab and a separate Risky tab for catch-all domains.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <h3>Optional monthly refreshes</h3>
+        <p>New contacts each month that never repeat someone already in your list. Your pipeline keeps moving without the manual sourcing.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHAT YOU GET ── -->
+<section id="deliverable">
+  <div class="inner">
+    <p class="tag">Deliverable</p>
+    <h2>What you receive</h2>
+    <p class="sub">A clean spreadsheet, ready to import into your CRM or sequencer the day it arrives.</p>
+    <div class="deliver-grid">
+      <div class="deliver-row">
+        <span class="deliver-key">Columns</span>
+        <span class="deliver-val">Name · Title · Company · LinkedIn URL · Verified work email</span>
+      </div>
+      <div class="deliver-row">
+        <span class="deliver-key">Tabs</span>
+        <span class="deliver-val">Verified tab for confirmed emails; Risky tab for catch-all domains, flagged separately so you decide how to use them</span>
+      </div>
+      <div class="deliver-row">
+        <span class="deliver-key">Format</span>
+        <span class="deliver-val">CSV, ready to import into any CRM or outreach tool</span>
+      </div>
+      <div class="deliver-row">
+        <span class="deliver-key">Deduplication</span>
+        <span class="deliver-val">Share your existing contact list and I'll remove anyone already in your CRM</span>
+      </div>
+      <div class="deliver-row">
+        <span class="deliver-key">Phones</span>
+        <span class="deliver-val">Available on request for contacts where a number is sourced</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SAMPLE LIST ── -->
+<section id="sample">
+  <div class="inner">
+    <p class="tag">Sample</p>
+    <h2>What the list looks like</h2>
+    <p class="sample-note">Illustrative example — all names, companies, and addresses are fictional.</p>
+    <div class="table-scroll">
+      <table class="sample-table" aria-label="Illustrative sample contact list">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Title</th>
+            <th>Company</th>
+            <th>Email</th>
+            <th>Status</th>
+            <th>LinkedIn</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>James Chen</td>
+            <td>VP of Sales</td>
+            <td>Meridian IT Services</td>
+            <td class="email-cell">j.chen@meridianits.example</td>
+            <td><span class="badge badge-v">Verified</span></td>
+            <td><a href="#sample" aria-label="LinkedIn profile (example)">linkedin.com/in/jchen-ex</a></td>
+          </tr>
+          <tr>
+            <td>Maya Patel</td>
+            <td>Director of Operations</td>
+            <td>Oakfield Staffing Group</td>
+            <td class="email-cell">m.patel@oakfieldsg.example</td>
+            <td><span class="badge badge-v">Verified</span></td>
+            <td><a href="#sample" aria-label="LinkedIn profile (example)">linkedin.com/in/mpatel-ex</a></td>
+          </tr>
+          <tr>
+            <td>Stefan Kowalski</td>
+            <td>Head of Business Development</td>
+            <td>Crestview Insurance Partners</td>
+            <td class="email-cell">s.kowalski@crestviewip.example</td>
+            <td><span class="badge badge-r">Risky</span></td>
+            <td><a href="#sample" aria-label="LinkedIn profile (example)">linkedin.com/in/skowalski-ex</a></td>
+          </tr>
+          <tr>
+            <td>Anika Nguyen</td>
+            <td>Chief Revenue Officer</td>
+            <td>Summit Commercial Services</td>
+            <td class="email-cell">a.nguyen@summitcs.example</td>
+            <td><span class="badge badge-v">Verified</span></td>
+            <td><a href="#sample" aria-label="LinkedIn profile (example)">linkedin.com/in/anguyen-ex</a></td>
+          </tr>
+          <tr>
+            <td>Richard Osei</td>
+            <td>IT Procurement Manager</td>
+            <td>Harbourline Managed Services</td>
+            <td class="email-cell">r.osei@harbourlinems.example</td>
+            <td><span class="badge badge-v">Verified</span></td>
+            <td><a href="#sample" aria-label="LinkedIn profile (example)">linkedin.com/in/rosei-ex</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ── COMPARISON ── -->
+<section id="compare">
+  <div class="inner">
+    <p class="tag">Why this instead</p>
+    <h2>Bought list vs. this service</h2>
+    <div class="compare-scroll">
+      <table class="compare-table" aria-label="Comparison between bought list and this service">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Bought list</th>
+            <th>This service</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="row-label">ICP fit</td>
+            <td class="col-bad">Generic database export</td>
+            <td class="col-good">Matched to your exact criteria</td>
+          </tr>
+          <tr>
+            <td class="row-label">Data sources</td>
+            <td class="col-bad">One database</td>
+            <td class="col-good">Multiple sources combined to close gaps</td>
+          </tr>
+          <tr>
+            <td class="row-label">Email verification</td>
+            <td class="col-bad">None before delivery</td>
+            <td class="col-good">Every address tested before you receive it</td>
+          </tr>
+          <tr>
+            <td class="row-label">Deduplication</td>
+            <td class="col-bad">No CRM awareness</td>
+            <td class="col-good">Deduplicated against your existing contacts</td>
+          </tr>
+          <tr>
+            <td class="row-label">Match reasoning</td>
+            <td class="col-bad">None</td>
+            <td class="col-good">A match reason for every contact on request</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHO IT'S FOR ── -->
+<section id="for">
+  <div class="inner">
+    <p class="tag">Fit</p>
+    <h2>Who this is for</h2>
+    <p>B2B companies doing outbound that need to reach specific roles at specific types of companies. If you're selling to decision-makers and your conversion rate is limited by who you're reaching, this is for you.</p>
+    <div class="for-tags">
+      <span class="for-tag">IT &amp; Managed Services</span>
+      <span class="for-tag">Commercial Service Providers</span>
+      <span class="for-tag">Staffing &amp; Recruiting</span>
+      <span class="for-tag">Insurance Brokers</span>
+      <span class="for-tag">B2B Startups</span>
+      <span class="for-tag">Professional Services</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── PRICING ── -->
+<section id="pricing">
+  <div class="inner">
+    <p class="tag">Pricing</p>
+    <h2>Quoted on call</h2>
+    <div class="price-display">Custom</div>
+    <p class="price-note">Depends on list size, ICP complexity, and refresh frequency.</p>
+    <p>Pricing is based on what you actually need. Book a 20-minute call to walk through your ICP, and I'll give you a number on the spot.</p>
+    <br>
+    <a href="https://calendly.com/adityaiyerr/aditya-iyer-meeting" class="btn btn-primary" target="_blank" rel="noopener" style="margin-top:24px">Book a 20-minute call</a>
+  </div>
+</section>
+
+<!-- ── FAQ ── -->
+<section id="faq">
+  <div class="inner">
+    <p class="tag">FAQ</p>
+    <h2>Common questions</h2>
+    <div class="faq-grid">
+      <div class="faq-item">
+        <p class="faq-q">Where does the data come from?</p>
+        <p class="faq-a">Licensed data providers combined with independent verification. No single source is complete — sourcing across multiple databases means fewer gaps in coverage and fewer contacts you'd otherwise miss.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">What does "verified" mean?</p>
+        <p class="faq-a">Each email address is tested against the recipient mail server before delivery. Verified contacts had their address confirmed as real and actively accepting mail. They go in the Verified tab.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">What's a catch-all domain?</p>
+        <p class="faq-a">Some mail servers are configured to accept any incoming email, even to addresses that don't exist. Because the server never bounces, we can't confirm whether the specific inbox is real. These contacts are flagged Risky so you can decide whether to include them in your sends.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">Do you send emails on my behalf?</p>
+        <p class="faq-a">No. The list is yours to use however you like in whatever sequencer or CRM you run. I source and verify the contacts; you own and run the outreach.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">How long does delivery take?</p>
+        <p class="faq-a">[X business days] from ICP sign-off, depending on list size and ICP complexity. Turnaround time is confirmed on the intake call before any work begins.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">I already have contacts in my CRM. Will I get duplicates?</p>
+        <p class="faq-a">Share your existing list and I'll deduplicate before delivery. You receive only net-new contacts that aren't already in your system.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CLOSING CTA ── -->
+<section id="cta">
+  <div class="inner">
+    <p class="tag">Get started</p>
+    <h2>Start with a free<br><em>25-contact sample.</em></h2>
+    <p>No commitment. Tell me your ICP on a 20-minute call and I'll put a sample list together before you decide anything.</p>
+    <a href="https://calendly.com/adityaiyerr/aditya-iyer-meeting" class="btn btn-primary" target="_blank" rel="noopener">Book a 20-minute call</a>
+  </div>
+</section>
+
 </body>
 </html>
