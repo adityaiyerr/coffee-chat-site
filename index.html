@@ -186,7 +186,7 @@
    While `live:false`, the command prints a status line instead of 404-ing.
 --------------------------------------------------------------------------- */
 const SECTIONS = {
-  research:      { label:'Research',    path:'/research/',    live:false },
+  research:      { label:'Research',    path:'/research/',    live:true  },
   'sales-agent': { label:'Sales Agent', path:'/sales-agent/', live:true  },
   resume:        { label:'Résumé',      path:'/resume/',      live:true  },
   music:         { label:'Music',       path:'/music/',       live:false },
@@ -295,8 +295,8 @@ document.addEventListener('click', e=>{
 
 /* ---- Ticker --------------------------------------------------------------- */
 $('#tickertext').innerHTML =
-  'IYER 1.0 <b>▲</b>  research desk online  ·  ' +
-  'sales agent — B2B lead gen in development  ·  resume — on file  ·  music — in the works  ·  type <b>help</b> to begin  ·  ';
+  'IYER 1.0 <b>▲</b>  research — five pillars of civilization series  ·  ' +
+  'sales agent — B2B contact sourcing  ·  resume — on file  ·  music — in the works  ·  type <b>help</b> to begin  ·  ';
 
 runBoot();
 </script>
