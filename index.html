@@ -1,14 +1,14 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Aditya Iyer</title>
-<meta name="description" content="Aditya Iyer — equity research, outreach, and ventures. Enter the terminal.">
+<meta name="description" content="Aditya Iyer â€” equity research, outreach, and ventures. Enter the terminal.">
 
 <!-- Favicon: an amber prompt glyph on near-black. Swap for a real .ico/.png later. -->
-<link rel="icon" type="image/png" href="/favicon.png?v=2">
-<link rel="apple-touch-icon" href="/favicon.png?v=2">
+<link rel="icon" type="image/png" href="/pf.png">
+<link rel="apple-touch-icon" href="/pf.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,7 +16,7 @@
 
 <style>
   :root{
-    /* Terminal palette — tied to the old-money brand:
+    /* Terminal palette â€” tied to the old-money brand:
        phosphor is a muted sage (descended from forest #20382d),
        amber is a warmer sibling of the brand gold #a78954. */
     --bg:#0a0c0b;
@@ -127,7 +127,7 @@
     .keys{grid-template-columns:repeat(2,1fr)}
   }
 
-  /* Quality floor: honour reduced-motion — no typing, blink, or scroll. */
+  /* Quality floor: honour reduced-motion â€” no typing, blink, or scroll. */
   @media (prefers-reduced-motion:reduce){
     .cursor,.ticker span{animation:none}
     .sig,.keys,.promptline{opacity:1;transition:none}
@@ -140,15 +140,15 @@
 
 <main class="screen">
   <div class="statusbar">
-    <span>Aditya Terminal — v1.0</span>
-    <span><span class="dot">●</span> session live</span>
+    <span>Aditya Terminal â€” v1.0</span>
+    <span><span class="dot">â—</span> session live</span>
   </div>
 
   <div id="boot" aria-hidden="true"></div>
 
   <div class="sig" id="sig">
     <div class="name">Aditya Iyer</div>
-    <div class="tagline"><b>equity research</b> · ventures · music</div>
+    <div class="tagline"><b>equity research</b> Â· ventures Â· music</div>
   </div>
 
   <hr class="hr">
@@ -166,7 +166,7 @@
     <span class="sigil">&gt;</span>
     <label for="cmd" class="visually-hidden" style="position:absolute;left:-9999px">Enter a command</label>
     <input id="cmd" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false"
-           placeholder="type a command — try 'help'">
+           placeholder="type a command â€” try 'help'">
     <span class="cursor" id="cur" aria-hidden="true"></span>
   </div>
 
@@ -175,21 +175,21 @@
   </div>
 
   <footer>
-    <span>© 2026 Aditya Iyer</span>
+    <span>Â© 2026 Aditya Iyer</span>
     <span><a href="mailto:adityaiyer124@gmail.com">adityaiyer124@gmail.com</a></span>
   </footer>
 </main>
 
 <script>
 /* ---------------------------------------------------------------------------
-   SECTIONS — the rooms this lobby routes to.
+   SECTIONS â€” the rooms this lobby routes to.
    Flip `live:true` and set the real `path` once each room's folder exists.
    While `live:false`, the command prints a status line instead of 404-ing.
 --------------------------------------------------------------------------- */
 const SECTIONS = {
   research:      { label:'Research',    path:'/research/',    live:true  },
   'sales-agent': { label:'Sales Agent', path:'/sales-agent/', live:true  },
-  resume:        { label:'Résumé',      path:'/resume/',      live:true  },
+  resume:        { label:'RÃ©sumÃ©',      path:'/resume/',      live:true  },
   music:         { label:'Music',       path:'/music/',       live:false },
 };
 const FKEYS = { F1:'research', F2:'sales-agent', F3:'resume', F4:'music',
@@ -242,8 +242,8 @@ function echo(cmd){ print(cmd, 'cmd'); }
 function activate(key){
   const s = SECTIONS[key];
   if(!s) return;
-  if(s.live){ print(`opening <span class="k">${s.label}</span> …`); window.location.href = s.path; }
-  else{ print(`<span class="k">${s.label}</span> :: coming online — reserved at <span class="k">${s.path}</span>`); }
+  if(s.live){ print(`opening <span class="k">${s.label}</span> â€¦`); window.location.href = s.path; }
+  else{ print(`<span class="k">${s.label}</span> :: coming online â€” reserved at <span class="k">${s.path}</span>`); }
 }
 
 const HELP = [
@@ -265,10 +265,10 @@ function handle(raw){
   switch(cmd){
     case 'help': case '?': case 'ls': print(`<span style="white-space:pre">${HELP}</span>`); break;
     case 'cv': case 'whoami': return activate('resume');
-    case 'about': print('Aditya Iyer — finance student, equity researcher, and builder. This terminal is the front door to the work.'); break;
+    case 'about': print('Aditya Iyer â€” finance student, equity researcher, and builder. This terminal is the front door to the work.'); break;
     case 'contact': print('email <span class="k">adityaiyer124@gmail.com</span>'); break;
     case 'clear': logEl.innerHTML=''; break;
-    default: print(`command not found: <span class="k">${cmd}</span> — type <span class="k">help</span>`);
+    default: print(`command not found: <span class="k">${cmd}</span> â€” type <span class="k">help</span>`);
   }
 }
 
@@ -296,8 +296,8 @@ document.addEventListener('click', e=>{
 
 /* ---- Ticker --------------------------------------------------------------- */
 $('#tickertext').innerHTML =
-  'IYER 1.0 <b>▲</b>  research — five pillars of civilization series  ·  ' +
-  'sales agent — B2B contact sourcing  ·  resume — on file  ·  music — in the works  ·  type <b>help</b> to begin  ·  ';
+  'IYER 1.0 <b>â–²</b>  research â€” five pillars of civilization series  Â·  ' +
+  'sales agent â€” B2B contact sourcing  Â·  resume â€” on file  Â·  music â€” in the works  Â·  type <b>help</b> to begin  Â·  ';
 
 runBoot();
 </script>
