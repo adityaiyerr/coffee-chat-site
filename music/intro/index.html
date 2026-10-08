@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A Life in Music: An Introduction</title>
+<link rel="icon" type="image/png" href="/pf.png">
+<link rel="apple-touch-icon" href="/pf.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --parchment:#FFF8EC;
+    --parchment-dark:#F2E8D2;
+    --ink:#2C1A0E;
+    --ink-light:#5C3D20;
+    --saffron:#C05A12;
+    --saffron-bright:#D4750A;
+    --deep-red:#8B1A1A;
+    --gold:#C9A227;
+    --gold-dim:#8A6E1C;
+    --indigo:#2E3A6E;
+    --cream-white:#FFFDF7;
+    --border:#D4B483;
+    --rule:#C4965A;
+    --serif-body:'EB Garamond',Georgia,serif;
+    --serif-head:'Cormorant Garamond',Georgia,serif;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+
+  body{
+    background:var(--parchment);
+    color:var(--ink);
+    font-family:var(--serif-body);
+    font-size:18px;
+    line-height:1.85;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ── TOPBAR ── */
+  .topbar{
+    background:var(--ink);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:12px 32px;
+    font-family:'EB Garamond',Georgia,serif;
+    font-size:13px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:#A07850;
+  }
+  .topbar a{
+    color:#C4965A;
+    text-decoration:none;
+    transition:color .15s;
+  }
+  .topbar a:hover{color:var(--gold)}
+
+  /* ── FULL-WIDTH BORDER BANDS ── */
+  .raj-band{display:block;width:100%;overflow:hidden}
+  .raj-band-top{height:28px}
+  .raj-band-bot{height:28px}
+
+  /* ── MAIN LAYOUT ── */
+  .wrap{
+    max-width:720px;
+    margin:0 auto;
+    padding:0 32px 80px;
+  }
+
+  /* ── MANDALA ── */
+  .mandala-wrap{
+    display:flex;
+    justify-content:center;
+    padding:40px 0 20px;
+  }
+
+  /* ── TITLE BLOCK ── */
+  .title-block{
+    text-align:center;
+    padding:0 0 32px;
+    border-bottom:1.5px solid var(--border);
+  }
+  .title-tag{
+    font-family:var(--serif-head);
+    font-size:11px;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--saffron);
+    margin-bottom:14px;
+  }
+  h1{
+    font-family:var(--serif-head);
+    font-weight:300;
+    font-size:clamp(30px,6vw,46px);
+    color:var(--ink);
+    line-height:1.2;
+    letter-spacing:.01em;
+    margin-bottom:16px;
+  }
+  .byline{
+    font-family:var(--serif-body);
+    font-size:14px;
+    color:var(--ink-light);
+    letter-spacing:.06em;
+  }
+
+  /* ── ORNAMENTAL RULE ── */
+  .orn-rule{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin:36px 0 28px;
+  }
+  .orn-rule-line{flex:1;height:1px;background:var(--border)}
+  .orn-rule-glyph{
+    font-family:var(--serif-head);
+    font-size:22px;
+    color:var(--gold);
+    line-height:1;
+    flex-shrink:0;
+  }
+
+  /* ── SECTION HEADING ── */
+  h2{
+    font-family:var(--serif-head);
+    font-weight:300;
+    font-size:26px;
+    color:var(--ink);
+    letter-spacing:.02em;
+    text-align:center;
+    margin-bottom:8px;
+  }
+
+  /* ── BODY TEXT ── */
+  .prose p{
+    margin-bottom:1.5em;
+    text-align:justify;
+    -webkit-hyphens:auto;
+    hyphens:auto;
+    color:var(--ink);
+  }
+
+  /* Drop cap on first paragraph */
+  .prose p:first-child::first-letter{
+    font-family:var(--serif-head);
+    font-weight:400;
+    font-size:4.8em;
+    line-height:.82;
+    float:left;
+    margin-right:.07em;
+    margin-top:.06em;
+    color:var(--saffron);
+  }
+
+  /* Footnote superscript */
+  sup.fn{
+    font-family:var(--serif-body);
+    font-size:.6em;
+    color:var(--saffron);
+    vertical-align:super;
+    line-height:0;
+    margin-left:1px;
+    text-decoration:none;
+    cursor:pointer;
+    border-bottom:none;
+  }
+  sup.fn a{
+    color:var(--saffron);
+    text-decoration:none;
+  }
+  sup.fn a:hover{color:var(--deep-red)}
+
+  /* ── FOOTNOTES SECTION ── */
+  .footnotes{
+    margin-top:48px;
+    padding-top:24px;
+    border-top:1.5px solid var(--border);
+  }
+  .fn-head{
+    font-family:var(--serif-head);
+    font-size:11px;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    color:var(--saffron);
+    margin-bottom:18px;
+  }
+  .fn-list{
+    list-style:none;
+    padding:0;
+  }
+  .fn-list li{
+    display:flex;
+    gap:12px;
+    font-size:14px;
+    line-height:1.65;
+    color:var(--ink-light);
+    margin-bottom:10px;
+    align-items:baseline;
+  }
+  .fn-num{
+    color:var(--saffron);
+    font-weight:500;
+    flex-shrink:0;
+    min-width:20px;
+    font-size:13px;
+  }
+  .fn-text em{
+    color:var(--ink);
+    font-style:italic;
+  }
+
+  /* ── INNER GEOMETRIC BAND — narrower, decorative ── */
+  .inner-band{
+    width:100%;
+    height:16px;
+    overflow:hidden;
+    display:block;
+    margin:0 0 0;
+  }
+
+  @media(max-width:580px){
+    .wrap{padding:0 20px 60px}
+    .topbar{padding:12px 20px}
+    body{font-size:16px}
+    h1{font-size:28px}
+  }
+</style>
+</head>
+<body>
+
+<!-- Topbar -->
+<div class="topbar">
+  <a href="/music/">← music</a>
+  <span>Oct 2026</span>
+</div>
+
+<!-- Top Rajasthani border band -->
+<svg class="raj-band raj-band-top" height="28" width="100%" preserveAspectRatio="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="rpt" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse">
+      <rect width="28" height="28" fill="#2C1A0E"/>
+      <polygon points="0,0 14,16 28,0"   fill="#C05A12"/>
+      <polygon points="0,28 14,12 28,28" fill="#8B1A1A"/>
+      <polygon points="4,0  14,8  24,0"  fill="#C9A227" opacity=".55"/>
+      <line x1="0" y1="1"  x2="28" y2="1"  stroke="#C9A227" stroke-width="1.5"/>
+      <line x1="0" y1="27" x2="28" y2="27" stroke="#C9A227" stroke-width="1.5"/>
+    </pattern>
+  </defs>
+  <rect width="100%" height="28" fill="url(#rpt)"/>
+</svg>
+
+<div class="wrap">
+
+  <!-- Lotus mandala SVG -->
+  <div class="mandala-wrap" aria-hidden="true">
+    <svg width="96" height="96" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg">
+      <!-- Outer ring -->
+      <circle cx="48" cy="48" r="44" fill="none" stroke="#D4B483" stroke-width="1"/>
+      <circle cx="48" cy="48" r="40" fill="none" stroke="#C9A227" stroke-width=".5" stroke-dasharray="3 3"/>
+      <!-- 8 petals -->
+      <g transform="translate(48,48)">
+        <ellipse rx="10" ry="26" fill="#C05A12" opacity=".82" transform="rotate(0)   translate(0,-18)"/>
+        <ellipse rx="10" ry="26" fill="#8B1A1A" opacity=".75" transform="rotate(45)  translate(0,-18)"/>
+        <ellipse rx="10" ry="26" fill="#C05A12" opacity=".82" transform="rotate(90)  translate(0,-18)"/>
+        <ellipse rx="10" ry="26" fill="#8B1A1A" opacity=".75" transform="rotate(135) translate(0,-18)"/>
+        <ellipse rx="10" ry="26" fill="#C05A12" opacity=".82" transform="rotate(180) translate(0,-18)"/>
+        <ellipse rx="10" ry="26" fill="#8B1A1A" opacity=".75" transform="rotate(225) translate(0,-18)"/>
+        <ellipse rx="10" ry="26" fill="#C05A12" opacity=".82" transform="rotate(270) translate(0,-18)"/>
+        <ellipse rx="10" ry="26" fill="#8B1A1A" opacity=".75" transform="rotate(315) translate(0,-18)"/>
+      </g>
+      <!-- Inner 8 petals — gold -->
+      <g transform="translate(48,48)">
+        <ellipse rx="6" ry="16" fill="#C9A227" opacity=".7" transform="rotate(22.5)  translate(0,-10)"/>
+        <ellipse rx="6" ry="16" fill="#C9A227" opacity=".7" transform="rotate(67.5)  translate(0,-10)"/>
+        <ellipse rx="6" ry="16" fill="#C9A227" opacity=".7" transform="rotate(112.5) translate(0,-10)"/>
+        <ellipse rx="6" ry="16" fill="#C9A227" opacity=".7" transform="rotate(157.5) translate(0,-10)"/>
+        <ellipse rx="6" ry="16" fill="#C9A227" opacity=".7" transform="rotate(202.5) translate(0,-10)"/>
+        <ellipse rx="6" ry="16" fill="#C9A227" opacity=".7" transform="rotate(247.5) translate(0,-10)"/>
+        <ellipse rx="6" ry="16" fill="#C9A227" opacity=".7" transform="rotate(292.5) translate(0,-10)"/>
+        <ellipse rx="6" ry="16" fill="#C9A227" opacity=".7" transform="rotate(337.5) translate(0,-10)"/>
+      </g>
+      <!-- Center -->
+      <circle cx="48" cy="48" r="9" fill="#2E3A6E"/>
+      <circle cx="48" cy="48" r="5" fill="#C9A227"/>
+      <circle cx="48" cy="48" r="2" fill="#FFF8EC"/>
+    </svg>
+  </div>
+
+  <!-- Title -->
+  <div class="title-block">
+    <div class="title-tag">Music · Introduction</div>
+    <h1>A Life in Music:<br>An Introduction</h1>
+    <div class="byline">Aditya Iyer &nbsp;·&nbsp; October 2026</div>
+  </div>
+
+  <!-- Inner band (narrow, under title) -->
+  <svg class="inner-band" height="16" width="100%" preserveAspectRatio="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="inn" x="0" y="0" width="16" height="16" patternUnits="userSpaceOnUse">
+        <rect width="16" height="16" fill="#F2E8D2"/>
+        <polygon points="0,0 8,9 16,0" fill="#C9A227" opacity=".35"/>
+        <polygon points="0,16 8,7 16,16" fill="#C05A12" opacity=".28"/>
+        <line x1="0" y1=".5" x2="16" y2=".5" stroke="#D4B483" stroke-width="1"/>
+        <line x1="0" y1="15.5" x2="16" y2="15.5" stroke="#D4B483" stroke-width="1"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="16" fill="url(#inn)"/>
+  </svg>
+
+  <div class="prose" style="margin-top:36px">
+
+    <p>Music has always been the undercurrent of my life — not a pursuit I chose so much as one I was born into. I grew up in a household filled with sound: the morning prayers my mother sang in <sup class="fn"><a href="#fn1" id="ref1">1</a></sup>Carnatic, the evening recordings of Pandit Ravi Shankar my father played low through the speakers, the rhythmic exercises I would hear from my teacher's room before lessons began. Long before I could name a single raga, I could feel the difference between one that opened the heart and one that stilled it.</p>
+
+    <p>I began learning the <sup class="fn"><a href="#fn2" id="ref2">2</a></sup>tabla at the age of six. My first teacher was a retired concert musician in our community who took on students not for money, but because he believed percussion was a dying language that needed custodians. He taught me that the tabla was never just an instrument for keeping time — it was a conversation, call and response with the vocalist, the veena, the silence itself. I spent years drilling the same compositions over and over, not because I lacked ability, but because he insisted that true understanding only came after a thousand repetitions had made a phrase feel completely natural, like breathing.</p>
+
+    <p>The music I grew up hearing was devotional in origin. Many of the compositions I first memorized were <sup class="fn"><a href="#fn3" id="ref3">3</a></sup>bhajans — the kind sung in temples on festival nights, voices rising over the drone of the harmonium, the whole room swaying in a kind of collective surrender. There is something in that sound I have never been able to shake. Even now, listening to a well-executed bhajan, I feel the same pull I felt as a child: not so much an emotion as a thinning of whatever usually separates me from everything else.</p>
+
+    <p>As I got older, my exposure widened. A cousin introduced me to the North Indian tradition — <sup class="fn"><a href="#fn4" id="ref4">4</a></sup>Hindustani classical music, with its different structures, its slower, more meditative unfolding. Where Carnatic music often feels like intricate architecture, Hindustani feels more like open water. Both traditions share deep roots; they diverged centuries ago, carrying their own innovations forward, but underneath the differences you can always sense the common source.</p>
+
+  </div>
+
+  <!-- Section break -->
+  <div class="orn-rule" aria-hidden="true">
+    <span class="orn-rule-line"></span>
+    <span class="orn-rule-glyph">❧</span>
+    <span class="orn-rule-line"></span>
+  </div>
+
+  <h2>My Journey Through Music</h2>
+  <div class="orn-rule" style="margin-top:16px" aria-hidden="true">
+    <span class="orn-rule-line"></span>
+    <span class="orn-rule-glyph">✦</span>
+    <span class="orn-rule-line"></span>
+  </div>
+
+  <div class="prose">
+
+    <p>My most formative musical relationship came later, when I began studying under a senior disciple of the <sup class="fn"><a href="#fn5" id="ref5">5</a></sup>Farukhabad Gharana — one of the oldest tabla lineages in North India. The teaching method was entirely oral. Nothing was written down. Compositions were transmitted from teacher to student through repetition and close listening, the same way they had been for generations. To learn under this system was to understand, in the most direct way possible, what it means to inherit something. The music was not mine to invent; I was a vessel for something that predated me by centuries.</p>
+
+    <p>Around the same time I picked up the <sup class="fn"><a href="#fn6" id="ref6">6</a></sup>harmonium. It was originally a European instrument — introduced to India in the nineteenth century — but it took root so completely in Indian devotional music that most people today think of it as native. I learned it primarily as a tool for accompanying vocal music and for understanding harmony in a tradition that does not think harmonically. Playing it helped me hear the skeletal structure beneath the ornament, the raga's essential shape underneath all the improvisation.</p>
+
+    <p>One of the teachers I studied under held the title <sup class="fn"><a href="#fn7" id="ref7">7</a></sup>Ustad — a designation in the Hindustani tradition that carries enormous weight. It is not a credential that can be bought or abbreviated; it comes from decades of mastery recognized by peers and the tradition itself. Spending time in his presence, even in the role of a very junior student, shaped the way I think about expertise generally: the recognition that the most profound knowledge is the hardest to transmit, and that real transmission requires patience measured not in hours but in years.</p>
+
+    <p>Through harmonium I also fell into the world of the <sup class="fn"><a href="#fn8" id="ref8">8</a></sup>ghazal — that ancient Urdu poetic form set to music, equal parts longing, wit, and philosophical resignation. The ghazal is a peculiar art because it operates on multiple registers at once: you can read it as a love poem, as a meditation on the divine, or as pure wordplay, and you would not be wrong in any of these readings. Listening to masters of the form — Mehdi Hassan, Ghulam Ali, Farida Khanum — I began to understand that the greatest art refuses to be reduced to a single meaning.</p>
+
+    <p>This journal is, among other things, an attempt to write about music the way it has been taught to me: without reducing it, without over-explaining it, but also without leaving it mystified. I want to write about specific recordings, specific traditions, specific moments of listening that have stayed with me. I want to trace the lines between things — the way a Carnatic composition from the seventeenth century finds an echo in a twentieth-century jazz improvisation, or the way a simple bhajan can do what elaborate theory sometimes cannot. I do not think I know more than I do. But I have been listening for a long time, and I have some things to say.</p>
+
+  </div>
+
+  <!-- Footnotes -->
+  <div class="footnotes">
+    <div class="fn-head">Notes</div>
+    <ol class="fn-list">
+      <li id="fn1">
+        <span class="fn-num">1.</span>
+        <span class="fn-text"><em>Carnatic music</em> — the classical music tradition of South India, distinguished from the Hindustani (North Indian) tradition. One of the oldest living musical traditions in the world, with a highly codified system of ragas (melodic frameworks), talas (rhythmic cycles), and a vast repertoire of composed works. <a href="#ref1">↩</a></span>
+      </li>
+      <li id="fn2">
+        <span class="fn-num">2.</span>
+        <span class="fn-text"><em>Tabla</em> — a pair of hand drums central to Hindustani classical music and widely used across Indian music traditions. The right-hand drum (dayan) is tuned to a specific pitch; the left-hand drum (bayan) produces bass tones. Each drumhead is treated with a black paste called syahi, which gives the tabla its distinctive resonant timbre and enables complex tonal control. <a href="#ref2">↩</a></span>
+      </li>
+      <li id="fn3">
+        <span class="fn-num">3.</span>
+        <span class="fn-text"><em>Bhajan</em> — devotional songs and hymns rooted in the Hindu tradition, typically addressed to a deity or expressing longing for the divine. Unlike the formalized structures of classical Indian music, bhajans emphasize emotional directness and communal participation. The tradition spans many centuries and includes composers from across India's major devotional movements. <a href="#ref3">↩</a></span>
+      </li>
+      <li id="fn4">
+        <span class="fn-num">4.</span>
+        <span class="fn-text"><em>Hindustani classical music</em> — the North Indian classical tradition, which diverged from its Carnatic counterpart several centuries ago, partly through interaction with Persian and Central Asian musical influences during the Mughal period. Characterized by extensive improvisation within modal frameworks (ragas) and a system of time cycles (talas). <a href="#ref4">↩</a></span>
+      </li>
+      <li id="fn5">
+        <span class="fn-num">5.</span>
+        <span class="fn-text"><em>Farukhabad Gharana</em> — one of the principal tabla traditions (gharanas) of North India, originating in Farukhabad, Uttar Pradesh. A <em>gharana</em> (literally "household") is a hereditary school of musical thought: a lineage of teachers and students who share a distinctive style, repertoire, and pedagogical method transmitted entirely through oral tradition. The Farukhabad style is known for its lyrical, melodic compositions. <a href="#ref5">↩</a></span>
+      </li>
+      <li id="fn6">
+        <span class="fn-num">6.</span>
+        <span class="fn-text"><em>Harmonium</em> — a free-reed keyboard instrument that produces sound by pushing air through metal reeds using bellows operated by hand. Introduced to India from Europe in the nineteenth century, the harmonium became thoroughly integrated into Indian devotional and classical music, particularly as an accompanying instrument for vocalists. <a href="#ref6">↩</a></span>
+      </li>
+      <li id="fn7">
+        <span class="fn-num">7.</span>
+        <span class="fn-text"><em>Ustad</em> — an honorific title in the Hindustani musical tradition (from Persian/Urdu, meaning "master" or "expert") conferred on a musician of exceptional, long-established mastery. The title is not self-declared; it is recognized by the tradition and by one's peers, and carries with it the authority to transmit the tradition to students. The equivalent title in Carnatic music is <em>Vidwan</em>. <a href="#ref7">↩</a></span>
+      </li>
+      <li id="fn8">
+        <span class="fn-num">8.</span>
+        <span class="fn-text"><em>Ghazal</em> — a poetic form of Arabic origin, developed extensively in Persian and Urdu literary traditions, and set to music in both Hindustani classical and semi-classical styles. A ghazal consists of couplets (sher) that share a refrain and rhyme scheme but are thematically independent, unified by mood rather than narrative. The recurring themes are love, longing, loss, and mysticism — often functioning simultaneously on the human and divine register. <a href="#ref8">↩</a></span>
+      </li>
+    </ol>
+  </div>
+
+</div>
+
+<!-- Bottom Rajasthani border band -->
+<svg class="raj-band raj-band-bot" height="28" width="100%" preserveAspectRatio="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="rpb" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse">
+      <rect width="28" height="28" fill="#2C1A0E"/>
+      <polygon points="0,0 14,16 28,0"   fill="#8B1A1A"/>
+      <polygon points="0,28 14,12 28,28" fill="#C05A12"/>
+      <polygon points="4,28 14,20 24,28" fill="#C9A227" opacity=".55"/>
+      <line x1="0" y1="1"  x2="28" y2="1"  stroke="#C9A227" stroke-width="1.5"/>
+      <line x1="0" y1="27" x2="28" y2="27" stroke="#C9A227" stroke-width="1.5"/>
+    </pattern>
+  </defs>
+  <rect width="100%" height="28" fill="url(#rpb)"/>
+</svg>
+
+</body>
+</html>

@@ -4,23 +4,226 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Music</title>
+<link rel="icon" type="image/png" href="/pf.png">
+<link rel="apple-touch-icon" href="/pf.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
+  :root{
+    --bg:#0a0806;
+    --panel:#130e09;
+    --warm:#C4A87C;
+    --dim:#6B5240;
+    --saffron:#D4750A;
+    --saffron-dim:#8B4E08;
+    --deep-red:#7A1808;
+    --gold:#C9A227;
+    --cream:#F5EAD8;
+    --rule:#2A1A0A;
+    --mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+    --serif:'Cormorant Garamond',Georgia,serif;
+  }
+
   *{box-sizing:border-box;margin:0;padding:0}
-  body{background:#0a0c0b;color:#8fb99a;font-family:'IBM Plex Mono',ui-monospace,monospace;
-    display:flex;align-items:center;justify-content:center;min-height:100vh;
-    flex-direction:column;gap:18px;padding:24px;text-align:center}
-  .label{font-size:0.7rem;letter-spacing:.16em;text-transform:uppercase;color:#4f6b58}
-  .title{font-size:1.1rem;color:#cfe0d3;letter-spacing:.04em}
-  .status{font-size:0.82rem;color:#4f6b58}
-  a{color:#d3a24a;text-decoration:none;font-size:0.78rem;letter-spacing:.1em;
-    text-transform:uppercase;border-bottom:1px solid #1c2a20;padding-bottom:1px}
-  a:hover{color:#e8b85a;border-color:#8a6c33}
+
+  body{
+    background:var(--bg);
+    color:var(--warm);
+    font-family:var(--mono);
+    font-size:13px;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ── TOPBAR — stays terminal ── */
+  .topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:10px 28px;
+    border-bottom:1px solid var(--rule);
+    font-size:11px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--dim);
+  }
+  .topbar a{color:var(--dim);text-decoration:none;transition:color .15s}
+  .topbar a:hover{color:var(--saffron)}
+
+  /* ── LAYOUT ── */
+  .wrap{max-width:820px;margin:0 auto;padding:0 28px}
+
+  /* ── GEOMETRIC RAJASTHANI BORDER BAND ── */
+  .raj-band{display:block;width:100%;height:22px;overflow:hidden;flex-shrink:0}
+
+  /* ── INNER CONTENT (with side rules) ── */
+  .inner{
+    padding:32px 24px 28px;
+    border-left:1px solid #2A1A0A;
+    border-right:1px solid #2A1A0A;
+  }
+
+  /* ── SECTION HEAD ── */
+  .section-head{
+    font-size:10px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--saffron);
+    margin-bottom:20px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .orn{
+    color:var(--gold);
+    font-size:16px;
+    letter-spacing:0;
+    line-height:1;
+  }
+
+  hr{border:none;border-top:1px solid var(--rule);margin:0}
+
+  /* ── POST LIST ── */
+  .post-list{margin:0 0 24px}
+
+  .post-row{
+    display:flex;
+    align-items:baseline;
+    padding:13px 12px;
+    border-bottom:1px solid var(--rule);
+    cursor:pointer;
+    outline:none;
+    text-decoration:none;
+    color:inherit;
+    transition:background .08s;
+  }
+  .post-row:first-child{border-top:1px solid var(--rule)}
+  .post-row:hover,.post-row.active{background:var(--panel)}
+  .post-row.active .post-idx,.post-row.active .post-name{color:var(--saffron)}
+
+  .post-idx{
+    color:var(--saffron-dim);
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:.08em;
+    flex-shrink:0;
+    width:32px;
+  }
+  .post-name{
+    flex:1;
+    font-size:13px;
+    color:var(--cream);
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    min-width:0;
+  }
+  .post-pipe{color:var(--dim);padding:0 10px;flex-shrink:0}
+  .post-date{font-size:11px;color:var(--dim);flex-shrink:0;letter-spacing:.06em}
+
+  .hint{
+    font-size:10px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--dim);
+    display:flex;
+    gap:24px;
+    margin-top:12px;
+  }
+  .hk{color:var(--saffron-dim);margin-right:5px}
+
+  @media(max-width:540px){
+    .wrap{padding:0 18px}
+    .topbar{padding:10px 18px}
+    .post-pipe,.post-date{display:none}
+    .post-name{white-space:normal;overflow:visible;text-overflow:unset}
+  }
 </style>
 </head>
 <body>
-  <span class="label">Iyer Terminal</span>
-  <span class="title">music</span>
-  <span class="status">coming online</span>
+
+<div class="topbar">
   <a href="/">← terminal</a>
+  <span>music</span>
+</div>
+
+<div class="wrap">
+
+  <!-- Top geometric band — Rajasthani chevrons in saffron / deep-red / gold -->
+  <svg class="raj-band" height="22" width="100%" preserveAspectRatio="none" aria-hidden="true">
+    <defs>
+      <pattern id="rpt" x="0" y="0" width="22" height="22" patternUnits="userSpaceOnUse">
+        <rect width="22" height="22" fill="#180C04"/>
+        <polygon points="0,0 11,12 22,0"  fill="#C05A12"/>
+        <polygon points="0,22 11,10 22,22" fill="#8B1A1A"/>
+        <line x1="0" y1="0.75"  x2="22" y2="0.75"  stroke="#C9A227" stroke-width="1.5"/>
+        <line x1="0" y1="21.25" x2="22" y2="21.25" stroke="#C9A227" stroke-width="1.5"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="22" fill="url(#rpt)"/>
+  </svg>
+
+  <div class="inner">
+
+    <div class="section-head">
+      <span class="orn">❈</span>
+      Music
+      <span class="orn">❈</span>
+    </div>
+
+    <hr>
+
+    <div class="post-list" id="post-list" role="listbox" aria-label="Music posts">
+
+      <a class="post-row" href="/music/intro/" role="option" tabindex="0">
+        <span class="post-idx">01</span>
+        <span class="post-name">A Life in Music: An Introduction</span>
+        <span class="post-pipe">|</span>
+        <span class="post-date">Oct 2026</span>
+      </a>
+
+    </div>
+
+    <div class="hint">
+      <span><span class="hk">↑ ↓</span> navigate</span>
+      <span><span class="hk">Enter</span> open</span>
+    </div>
+
+  </div>
+
+  <!-- Bottom geometric band — inverted -->
+  <svg class="raj-band" height="22" width="100%" preserveAspectRatio="none" aria-hidden="true">
+    <defs>
+      <pattern id="rpb" x="0" y="0" width="22" height="22" patternUnits="userSpaceOnUse">
+        <rect width="22" height="22" fill="#180C04"/>
+        <polygon points="0,0 11,12 22,0"  fill="#8B1A1A"/>
+        <polygon points="0,22 11,10 22,22" fill="#C05A12"/>
+        <line x1="0" y1="0.75"  x2="22" y2="0.75"  stroke="#C9A227" stroke-width="1.5"/>
+        <line x1="0" y1="21.25" x2="22" y2="21.25" stroke="#C9A227" stroke-width="1.5"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="22" fill="url(#rpb)"/>
+  </svg>
+
+</div>
+
+<script>
+var rows = Array.from(document.querySelectorAll('.post-row'));
+var sel = -1;
+function activate(i){ rows.forEach(function(r,j){r.classList.toggle('active',j===i);}); sel=i; }
+document.addEventListener('keydown',function(e){
+  if(e.key==='ArrowDown'||e.key==='j'){e.preventDefault();activate(Math.min(sel+1,rows.length-1));}
+  else if(e.key==='ArrowUp'||e.key==='k'){e.preventDefault();activate(Math.max(sel-1,0));}
+  else if(e.key==='Enter'&&sel>=0){window.location.href=rows[sel].href;}
+});
+rows.forEach(function(r,i){
+  r.addEventListener('mouseenter',function(){activate(i);});
+  r.addEventListener('mouseleave',function(){activate(-1);});
+  r.addEventListener('focus',function(){activate(i);});
+  r.addEventListener('blur',function(){activate(-1);});
+});
+</script>
+
 </body>
 </html>

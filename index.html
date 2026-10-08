@@ -190,7 +190,7 @@ const SECTIONS = {
   research:      { label:'Research',    path:'/research/',    live:true  },
   'sales-agent': { label:'B2B Lead Gen', path:'/sales-agent/', live:true  },
   resume:        { label:'Résumé',      path:'/resume/',      live:true  },
-  music:         { label:'Music',       path:'/music/',       live:false },
+  music:         { label:'Music',       path:'/music/',       live:true  },
 };
 const FKEYS = { F1:'research', F2:'sales-agent', F3:'resume', F4:'music',
                 '1':'research', '2':'sales-agent', '3':'resume', '4':'music' };
@@ -297,7 +297,7 @@ document.addEventListener('click', e=>{
 /* ---- Ticker --------------------------------------------------------------- */
 $('#tickertext').innerHTML =
   'IYER 1.0 <b>▲</b>  research — five pillars of civilization series  ·  ' +
-  'B2B lead gen — contact sourcing and intelligence  ·  resume — on file  ·  music — in the works  ·  type <b>help</b> to begin  ·  ';
+  'B2B lead gen — contact sourcing and intelligence  ·  resume — on file  ·  music — a life in music: an introduction  ·  type <b>help</b> to begin  ·  ';
 
 runBoot();
 </script>
