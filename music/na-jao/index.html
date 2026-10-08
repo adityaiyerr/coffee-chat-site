@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Na Jao Soorat e Haalaat</title>
+<link rel="icon" type="image/png" href="/pf.png">
+<link rel="apple-touch-icon" href="/pf.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --parchment:#FFF8EC;
+    --parchment-dark:#F2E8D2;
+    --parchment-panel:#FAF0D8;
+    --ink:#2C1A0E;
+    --ink-light:#5C3D20;
+    --saffron:#C05A12;
+    --saffron-bright:#D4750A;
+    --deep-red:#8B1A1A;
+    --gold:#C9A227;
+    --gold-dim:#8A6E1C;
+    --indigo:#2E3A6E;
+    --rain-blue:#1A3050;
+    --rain-tint:#EEF3F8;
+    --cream-white:#FFFDF7;
+    --border:#D4B483;
+    --rule:#C4965A;
+    --serif-body:'EB Garamond',Georgia,serif;
+    --serif-head:'Cormorant Garamond',Georgia,serif;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+
+  body{
+    background:var(--parchment);
+    color:var(--ink);
+    font-family:var(--serif-body);
+    font-size:18px;
+    line-height:1.85;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ── TOPBAR ── */
+  .topbar{
+    background:var(--ink);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:12px 32px;
+    font-family:'EB Garamond',Georgia,serif;
+    font-size:13px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:#A07850;
+  }
+  .topbar a{color:#C4965A;text-decoration:none;transition:color .15s}
+  .topbar a:hover{color:var(--gold)}
+
+  /* ── BORDER BANDS ── */
+  .raj-band{display:block;width:100%;overflow:hidden}
+
+  /* ── MAIN LAYOUT ── */
+  .wrap{max-width:720px;margin:0 auto;padding:0 32px 80px}
+
+  /* ── TITLE BLOCK ── */
+  .title-block{
+    padding:40px 0 32px;
+    text-align:center;
+    border-bottom:1.5px solid var(--border);
+  }
+  .title-tag{
+    font-family:var(--serif-head);
+    font-size:11px;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--saffron);
+    margin-bottom:14px;
+  }
+  .title-deva{
+    font-family:var(--serif-head);
+    font-size:clamp(22px,4.5vw,32px);
+    font-weight:300;
+    color:var(--saffron);
+    letter-spacing:.03em;
+    margin-bottom:10px;
+    line-height:1.3;
+  }
+  h1{
+    font-family:var(--serif-head);
+    font-weight:300;
+    font-size:clamp(28px,5.5vw,42px);
+    color:var(--ink);
+    line-height:1.2;
+    letter-spacing:.01em;
+    margin-bottom:18px;
+  }
+  .byline{
+    font-size:14px;
+    color:var(--ink-light);
+    letter-spacing:.06em;
+  }
+  .byline em{color:var(--ink-light);font-style:italic}
+
+  /* ── ORNAMENTAL RULES ── */
+  .orn-rule{
+    display:flex;align-items:center;gap:12px;margin:36px 0 28px;
+  }
+  .orn-rule-line{flex:1;height:1px;background:var(--border)}
+  .orn-rule-glyph{
+    font-family:var(--serif-head);font-size:22px;
+    color:var(--gold);line-height:1;flex-shrink:0;
+  }
+  .orn-rule-sm{
+    display:flex;align-items:center;gap:10px;
+    margin:24px 0 20px;
+  }
+  .orn-rule-sm .orn-rule-line{background:#E0C898}
+  .orn-rule-sm .orn-rule-glyph{font-size:16px;color:#C4965A}
+
+  /* ── SECTION HEADING ── */
+  h2{
+    font-family:var(--serif-head);
+    font-weight:300;font-size:26px;
+    color:var(--ink);letter-spacing:.02em;
+    text-align:center;margin-bottom:8px;
+  }
+
+  /* ── PROSE ── */
+  .prose p{
+    margin-bottom:1.5em;
+    text-align:justify;
+    -webkit-hyphens:auto;hyphens:auto;
+    color:var(--ink);
+  }
+  .prose p:first-child::first-letter{
+    font-family:var(--serif-head);
+    font-weight:400;font-size:4.8em;
+    line-height:.82;float:left;
+    margin-right:.07em;margin-top:.06em;
+    color:var(--saffron);
+  }
+
+  /* ── LYRIC FOLIO ── */
+  .lyric-folio{
+    margin:32px 0;
+    border:1.5px solid var(--border);
+    border-radius:2px;
+    overflow:hidden;
+    background:var(--parchment-panel);
+  }
+  .lyric-folio-head{
+    background:var(--ink);
+    padding:8px 20px;
+    font-family:var(--serif-head);
+    font-size:11px;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    color:#A07850;
+    display:flex;justify-content:space-between;align-items:center;
+  }
+  .lyric-folio-head span{color:#C4965A}
+  .lyric-inner{padding:20px 24px}
+
+  .couplet{
+    margin-bottom:28px;
+    padding-bottom:28px;
+    border-bottom:1px solid #E0C898;
+  }
+  .couplet:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+
+  .couplet-deva{
+    font-family:var(--serif-head);
+    font-size:18px;
+    color:var(--saffron);
+    text-align:center;
+    line-height:1.6;
+    margin-bottom:6px;
+  }
+  .couplet-roman{
+    font-style:italic;
+    font-size:15px;
+    color:var(--ink-light);
+    text-align:center;
+    line-height:1.6;
+    margin-bottom:6px;
+  }
+  .couplet-eng{
+    font-size:15px;
+    color:var(--ink);
+    text-align:center;
+    line-height:1.6;
+  }
+  .couplet-sep{
+    display:block;
+    text-align:center;
+    color:#C4965A;
+    font-size:14px;
+    letter-spacing:.2em;
+    margin:4px 0 0;
+  }
+
+  /* ── HIGHLIGHTED COUPLET (rain / Malhar) ── */
+  .couplet-rain{
+    background:linear-gradient(135deg, #EDF2F8 0%, #E8EFF7 100%);
+    border:1.5px solid #B8C8DC;
+    border-radius:2px;
+    padding:20px 24px;
+    margin:24px 0;
+    position:relative;
+    overflow:hidden;
+  }
+  .couplet-rain::before{
+    content:'';
+    position:absolute;top:0;left:0;right:0;height:3px;
+    background:linear-gradient(90deg,#2E3A6E,#4A6A9A,#2E3A6E);
+  }
+  .couplet-rain .couplet-deva{color:#2E3A6E}
+  .couplet-rain .couplet-roman{color:#3A4E6A}
+  .couplet-rain .couplet-eng{color:#1A2840}
+  .rain-label{
+    font-family:var(--serif-head);
+    font-size:10px;letter-spacing:.18em;
+    text-transform:uppercase;color:#4A6A9A;
+    text-align:center;margin-top:12px;
+  }
+
+  /* ── RAAG CALLOUT BOX ── */
+  .raag-box{
+    border-left:3px solid var(--gold);
+    background:var(--parchment-panel);
+    padding:20px 24px;
+    margin:28px 0;
+    position:relative;
+  }
+  .raag-box-head{
+    font-family:var(--serif-head);
+    font-size:11px;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--gold-dim);
+    margin-bottom:10px;
+  }
+  .raag-name{
+    font-family:var(--serif-head);
+    font-weight:300;font-size:24px;
+    color:var(--ink);margin-bottom:8px;
+    letter-spacing:.02em;
+  }
+  .raag-box p{
+    font-size:15px;color:var(--ink-light);
+    line-height:1.7;margin-bottom:10px;
+  }
+  .raag-box p:last-child{margin-bottom:0}
+  .raag-box blockquote{
+    border-left:2px solid var(--border);
+    padding:10px 16px;
+    margin:12px 0;
+    font-style:italic;
+    font-size:15px;
+    color:var(--ink-light);
+    line-height:1.65;
+  }
+  .raag-link{
+    display:inline-flex;align-items:center;gap:7px;
+    margin-top:12px;
+    font-family:var(--serif-head);
+    font-size:13px;letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--saffron);
+    text-decoration:none;
+    border-bottom:1px solid #D4B48366;
+    padding-bottom:2px;
+    transition:color .15s,border-color .15s;
+  }
+  .raag-link:hover{color:var(--deep-red);border-color:var(--deep-red)}
+  .raag-link-arrow{font-size:16px;line-height:1}
+
+  /* Rain raag box variant */
+  .raag-box-rain{
+    border-left-color:#4A6A9A;
+    background:linear-gradient(135deg,#EDF2F8,#F3F7FC);
+  }
+  .raag-box-rain .raag-box-head{color:#4A6A9A}
+  .raag-box-rain .raag-name{color:var(--rain-blue)}
+  .raag-box-rain p{color:#2A3A50}
+  .raag-box-rain blockquote{border-left-color:#B8C8DC;color:#3A4E6A}
+
+  /* ── LISTEN CARD (YouTube) ── */
+  .listen-card{
+    margin:40px 0;
+    border:1.5px solid var(--border);
+    border-radius:2px;
+    overflow:hidden;
+  }
+  .listen-card-head{
+    background:var(--ink);
+    padding:10px 20px;
+    display:flex;justify-content:space-between;align-items:center;
+    font-family:var(--serif-head);
+    font-size:11px;letter-spacing:.2em;
+    text-transform:uppercase;color:#A07850;
+  }
+  .listen-card-head .listen-live{
+    color:var(--saffron-bright);
+    display:flex;align-items:center;gap:6px;
+    font-size:10px;letter-spacing:.14em;
+  }
+  .listen-card-head .listen-live::before{
+    content:'♪';font-size:12px;
+  }
+  .listen-embed{
+    position:relative;
+    padding-bottom:56.25%;
+    height:0;
+    background:#111;
+  }
+  .listen-embed iframe{
+    position:absolute;top:0;left:0;
+    width:100%;height:100%;
+    border:none;
+  }
+  .listen-caption{
+    padding:12px 20px;
+    background:var(--parchment-panel);
+    font-size:13px;color:var(--ink-light);
+    border-top:1px solid var(--border);
+    font-style:italic;
+  }
+
+  /* ── FOOTNOTES ── */
+  .footnotes{
+    margin-top:48px;padding-top:24px;
+    border-top:1.5px solid var(--border);
+  }
+  .fn-head{
+    font-family:var(--serif-head);
+    font-size:11px;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--saffron);
+    margin-bottom:18px;
+  }
+  .fn-list{list-style:none;padding:0}
+  .fn-list li{
+    display:flex;gap:12px;
+    font-size:14px;line-height:1.65;
+    color:var(--ink-light);margin-bottom:10px;
+    align-items:baseline;
+  }
+  .fn-num{color:var(--saffron);font-weight:500;flex-shrink:0;min-width:20px;font-size:13px}
+  .fn-text em{color:var(--ink);font-style:italic}
+  .fn-text a{color:var(--saffron);text-decoration:none;border-bottom:1px solid #D4B48366}
+  .fn-text a:hover{color:var(--deep-red)}
+
+  /* Footnote superscript */
+  sup.fn a{color:var(--saffron);text-decoration:none}
+  sup.fn a:hover{color:var(--deep-red)}
+
+  /* ── INNER BAND ── */
+  .inner-band{width:100%;height:16px;overflow:hidden;display:block}
+
+  @media(max-width:580px){
+    .wrap{padding:0 20px 60px}
+    .topbar{padding:12px 20px}
+    body{font-size:16px}
+    h1{font-size:26px}
+    .couplet-deva{font-size:16px}
+    .lyric-inner{padding:16px 16px}
+  }
+</style>
+</head>
+<body>
+
+<!-- Topbar -->
+<div class="topbar">
+  <a href="/music/">← music</a>
+  <span>Oct 2026</span>
+</div>
+
+<!-- Top Rajasthani border band -->
+<svg class="raj-band" height="28" width="100%" preserveAspectRatio="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="rpt" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse">
+      <rect width="28" height="28" fill="#2C1A0E"/>
+      <polygon points="0,0 14,16 28,0"   fill="#C05A12"/>
+      <polygon points="0,28 14,12 28,28" fill="#8B1A1A"/>
+      <polygon points="4,0  14,8  24,0"  fill="#C9A227" opacity=".55"/>
+      <line x1="0" y1="1"  x2="28" y2="1"  stroke="#C9A227" stroke-width="1.5"/>
+      <line x1="0" y1="27" x2="28" y2="27" stroke="#C9A227" stroke-width="1.5"/>
+    </pattern>
+  </defs>
+  <rect width="100%" height="28" fill="url(#rpt)"/>
+</svg>
+
+<div class="wrap">
+
+  <!-- Title block -->
+  <div class="title-block">
+    <div class="title-tag">Music · Ghazal</div>
+    <div class="title-deva">ना जाओ सूरत ए हालात</div>
+    <h1>Na Jao Soorat e Haalaat</h1>
+    <div class="byline">
+      Written by <em>Nazar Hussain</em> &nbsp;·&nbsp; October 2026
+    </div>
+  </div>
+
+  <!-- Inner narrow band -->
+  <svg class="inner-band" height="16" width="100%" preserveAspectRatio="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="inn" x="0" y="0" width="16" height="16" patternUnits="userSpaceOnUse">
+        <rect width="16" height="16" fill="#F2E8D2"/>
+        <polygon points="0,0 8,9 16,0" fill="#C9A227" opacity=".35"/>
+        <polygon points="0,16 8,7 16,16" fill="#C05A12" opacity=".28"/>
+        <line x1="0" y1=".5" x2="16" y2=".5" stroke="#D4B483" stroke-width="1"/>
+        <line x1="0" y1="15.5" x2="16" y2="15.5" stroke="#D4B483" stroke-width="1"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="16" fill="url(#inn)"/>
+  </svg>
+
+  <div class="prose" style="margin-top:36px">
+    <p>For my first music recommendation, I wanted to open with a <sup class="fn"><a href="#fn1" id="ref1">1</a></sup>ghazal — and not merely a beautiful one, but one that demonstrates something I hope to return to throughout this series: the way a raga's emotional architecture and a poet's words can lock together so completely that neither seems to exist without the other. The ghazal is <em>Na Jao Soorat e Haalaat</em>, written by Nazar Hussain, a legendary composer of the form. The lyrics read like pure poetry. The music makes you feel them in your body.</p>
+  </div>
+
+  <!-- Lyric Folio -->
+  <div class="lyric-folio">
+    <div class="lyric-folio-head">
+      <span>Lyrics</span>
+      <span>ना जाओ सूरत ए हालात</span>
+    </div>
+    <div class="lyric-inner">
+
+      <div class="couplet">
+        <div class="couplet-deva">ना जाओ सूरत ए हालात देखते जाओ,</div>
+        <div class="couplet-roman">na jao surat ae halat dekhte jao,</div>
+        <div class="couplet-eng">Do not leave yet; stay and witness the state of affairs,</div>
+      </div>
+
+      <div class="couplet">
+        <div class="couplet-deva">है कैसे हिज्र के दिन रात देखते जाओ,</div>
+        <div class="couplet-roman">hai kaise hijra ke din raat dekhte jao,</div>
+        <div class="couplet-eng">Observe how the days and nights of <sup class="fn"><a href="#fn2" id="ref2">2</a></sup>separation unfold.</div>
+      </div>
+
+      <!-- Rain couplet — highlighted for Miyan Ki Malhar -->
+      <div class="couplet-rain">
+        <div class="couplet-deva">तुम्हारे याद में आंखें बरस रही हैं मेरी,</div>
+        <div class="couplet-roman">tumhare yaad mein aankhen baras rahi hain meri,</div>
+        <div class="couplet-eng">My eyes are shedding tears in your memory;</div>
+        <div style="height:10px"></div>
+        <div class="couplet-deva">बगैर अब्र के बरसात देखते जाओ,</div>
+        <div class="couplet-roman">bagair abr ke barsaat dekhte jao,</div>
+        <div class="couplet-eng">Behold a downpour occurring without a cloud in sight.</div>
+        <div class="rain-label">↑ Raag shifts here — see below</div>
+      </div>
+
+      <div class="couplet">
+        <div class="couplet-deva">करो क़ायम दयार ए फिऱाक में कुछ दिन,</div>
+        <div class="couplet-roman">karo kayam dayar ae phyarak mein kuch din,</div>
+        <div class="couplet-eng">Linger for a while in this realm of separation,</div>
+      </div>
+
+      <div class="couplet">
+        <div class="couplet-deva">दिलों पे दर्द के असरात देखते जाओ,</div>
+        <div class="couplet-roman">dilon pe dard ke asrat dekhte jao,</div>
+        <div class="couplet-eng">And witness the toll that pain takes upon the heart.</div>
+      </div>
+
+      <div class="couplet">
+        <div class="couplet-deva">तुम्हारे हिज्र में जीते हैं कैसे दीवाने,</div>
+        <div class="couplet-roman">tumhare hijra mein jeete hain kaise diwane,</div>
+        <div class="couplet-eng">See how the lovelorn survive in your absence,</div>
+      </div>
+
+      <div class="couplet">
+        <div class="couplet-deva">जहां ए ग़म के तिलस्मात देखते जाओ।</div>
+        <div class="couplet-roman">jahan ae gham ke tilsmat dekhte jao</div>
+        <div class="couplet-eng">And behold the bewitching spells of this world of sorrow.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Raag section heading -->
+  <div class="orn-rule">
+    <span class="orn-rule-line"></span>
+    <span class="orn-rule-glyph">❧</span>
+    <span class="orn-rule-line"></span>
+  </div>
+
+  <h2>The <sup class="fn"><a href="#fn3" id="ref3">3</a></sup>Raag</h2>
+
+  <div class="orn-rule" style="margin-top:16px">
+    <span class="orn-rule-line"></span>
+    <span class="orn-rule-glyph">✦</span>
+    <span class="orn-rule-line"></span>
+  </div>
+
+  <!-- Shahana callout -->
+  <div class="raag-box">
+    <div class="raag-box-head">Primary Raag</div>
+    <div class="raag-name">Shahana</div>
+    <p>This ghazal is set in <sup class="fn"><a href="#fn4" id="ref4">4</a></sup>Shahana — a raga that, on first listen, can be mistaken for its close relative <sup class="fn"><a href="#fn5" id="ref5">5</a></sup>Bhimpalasi. They share the same notes. But Shahana is played differently: certain phrases are emphasized, certain movements avoided, and the overall emotional gravity shifts from Bhimpalasi's longing into something more regal, more composed in its melancholy.</p>
+    <p>The name itself tells you everything you need to know. Shahana means <em>"Of Royal Demeanor"</em> — and you can feel that the moment the composition begins. There is a stateliness to the way it moves, a kind of dignified suffering rather than raw grief. The scale does not weep; it holds itself upright.</p>
+    <blockquote>
+      "Shahana is linked in Medieval texts to 'a Persian melody known as Firodast', and classical poetry concerning it often features descriptions of springtime and monsoons — both suggesting a relief from extreme conditions: a degree of euphoria is, indeed, integral to the psycho-acoustics of the raga…"
+    </blockquote>
+    <p>That double register — royal bearing and monsoon relief, grief and euphoria — is exactly what this ghazal inhabits. The beloved is being implored to stay and witness the separation they caused. It is not a shout; it is a composed, devastating invitation.</p>
+    <a class="raag-link" href="https://ragajunglism.org/ragas/shahana/" target="_blank" rel="noopener">
+      <span class="raag-link-arrow">↗</span> Explore Shahana on Raga Junglism
+    </a>
+  </div>
+
+  <!-- Malhar callout -->
+  <div class="raag-box raag-box-rain">
+    <div class="raag-box-head">The Shift — Raag Within a Raag</div>
+    <div class="raag-name">Miyan Ki Malhar</div>
+    <p>Listen for the moment when the composition reaches the rain couplet above. On <em>tumhare yaad mein aankhen baras rahi hain meri</em> — "My eyes are shedding tears in your memory" — the melodic material shifts. The musician moves into <sup class="fn"><a href="#fn6" id="ref6">6</a></sup>Miyan Ki Malhar, the raga most deeply associated with rain, monsoons, and thunderstorms in the Hindustani tradition.</p>
+    <p>The move is not accidental. In the lines, the tears shed in missing someone become symbolic of the monsoon itself — <em>bagair abr ke barsaat</em>, a downpour without clouds. By invoking Malhar precisely here, the composer lets the music carry the metaphor that the words are reaching toward. The raga does what language alone cannot: it puts rain inside the room.</p>
+    <p>This is what I mean when I say the intertwining of raga and text creates something you cannot find elsewhere. The poetry is beautiful on the page. The music makes you feel the rain.</p>
+  </div>
+
+  <div class="prose" style="margin-top:36px">
+    <p>A final note before you listen. You will hear the harmonium in this recording. The player is my Guru, Ustad Akhlak Hussain Varsi — the same teacher I mentioned in the introduction, whose lineage connects directly to the great tabla and vocal masters of North India. Watching him accompany — the way he finds the gaps in the vocal line, the way he holds the drone while shaping the melody — is itself a lesson in listening. I hope you hear what I hear.</p>
+  </div>
+
+  <!-- Listen card -->
+  <div class="listen-card">
+    <div class="listen-card-head">
+      <span>Listen</span>
+      <span class="listen-live">Na Jao Soorat e Haalaat</span>
+    </div>
+    <div class="listen-embed">
+      <iframe
+        src="https://www.youtube.com/embed/DKR-k1-x324"
+        title="Na Jao Soorat e Haalaat — Ghazal by Nazar Hussain"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
+    <div class="listen-caption">
+      Ghazal by Nazar Hussain · harmonium: Ustad Akhlak Hussain Varsi
+    </div>
+  </div>
+
+  <!-- Footnotes -->
+  <div class="footnotes">
+    <div class="fn-head">Notes</div>
+    <ol class="fn-list">
+      <li id="fn1">
+        <span class="fn-num">1.</span>
+        <span class="fn-text"><em>Ghazal</em> — a poetic form of Arabic origin, developed extensively in Persian and Urdu literary traditions, set to music in both Hindustani classical and semi-classical styles. Couplets (sher) share a refrain and rhyme scheme but are thematically independent, unified by mood. Recurring themes: love, longing, loss, and mysticism — often functioning simultaneously on the human and divine register. <a href="#ref1">↩</a></span>
+      </li>
+      <li id="fn2">
+        <span class="fn-num">2.</span>
+        <span class="fn-text"><em>Hijr</em> (हिज्र) — separation, particularly the pain of being apart from a beloved. One of the central themes of ghazal poetry, <em>hijr</em> operates on both the romantic and the spiritual register: the separation from a lover and the soul's separation from the divine. Its counterpart, <em>visal</em>, is reunion. <a href="#ref2">↩</a></span>
+      </li>
+      <li id="fn3">
+        <span class="fn-num">3.</span>
+        <span class="fn-text"><em>Raag</em> (also <em>raga</em>) — a melodic framework in Indian classical music, defined by a specific set of notes, characteristic ascending and descending movements, emphasized tones, and an associated emotional character (<em>rasa</em>). A raag is not a scale or a key but a complete musical personality — specifying not just which notes to use, but how, in what order, and with what feeling. Different ragas are associated with different times of day, seasons, and emotional states. <a href="#ref3">↩</a></span>
+      </li>
+      <li id="fn4">
+        <span class="fn-num">4.</span>
+        <span class="fn-text"><em>Shahana</em> — a Hindustani raga whose name means "Of Royal Demeanor." It shares notes with Bhimpalasi but is distinguished by specific melodic phrases and an overall character that blends dignified grief with a quality of euphoria. Medieval texts link it to a Persian melody called Firodast; classical poetry set in Shahana often evokes springtime and monsoon imagery. <a href="#ref4">↩</a></span>
+      </li>
+      <li id="fn5">
+        <span class="fn-num">5.</span>
+        <span class="fn-text"><em>Bhimpalasi</em> — a late-afternoon Hindustani raga in the Kafi thaat, known for its mood of deep longing and pathos (<em>shringar</em> and <em>karuna rasa</em>). It is one of the most performed ragas in both vocal and instrumental North Indian classical music. Shahana and Bhimpalasi share the same notes but differ in characteristic melodic movements and emotional emphasis. <a href="#ref5">↩</a></span>
+      </li>
+      <li id="fn6">
+        <span class="fn-num">6.</span>
+        <span class="fn-text"><em>Miyan Ki Malhar</em> — one of the most revered ragas in the Malhar family, traditionally attributed to the great 16th-century musician Miyan Tansen at the court of Akbar. It is strongly associated with the monsoon and is said to have the power to bring rain. The raga carries a simultaneous feeling of release and longing — the relief of the first rains and the ache of the storm. <a href="#ref6">↩</a></span>
+      </li>
+    </ol>
+  </div>
+
+</div>
+
+<!-- Bottom Rajasthani border band -->
+<svg class="raj-band" height="28" width="100%" preserveAspectRatio="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="rpb" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse">
+      <rect width="28" height="28" fill="#2C1A0E"/>
+      <polygon points="0,0 14,16 28,0"   fill="#8B1A1A"/>
+      <polygon points="0,28 14,12 28,28" fill="#C05A12"/>
+      <polygon points="4,28 14,20 24,28" fill="#C9A227" opacity=".55"/>
+      <line x1="0" y1="1"  x2="28" y2="1"  stroke="#C9A227" stroke-width="1.5"/>
+      <line x1="0" y1="27" x2="28" y2="27" stroke="#C9A227" stroke-width="1.5"/>
+    </pattern>
+  </defs>
+  <rect width="100%" height="28" fill="url(#rpb)"/>
+</svg>
+
+</body>
+</html>
